@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Menú Digital</title>
 
     <!-- Tailwind CSS -->
@@ -15,28 +15,44 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
+        * {
+            box-sizing: border-box;
+        }
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
+            width: 100%;
+            max-width: 100vw;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+        }
+        /* Ocultar barra de desplazamiento en categorías pero mantener funcionalidad */
+        .scrollbar-none::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-none {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
     </style>
 </head>
 
-<body class="bg-gradient-to-b from-slate-950 via-zinc-950 to-black text-white min-h-screen flex flex-col pb-24 overflow-x-hidden">
+<body class="bg-gradient-to-b from-slate-950 via-zinc-950 to-black text-white min-h-screen flex flex-col pb-28 relative">
 
     <!-- EFECTO DE FONDO -->
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-32 bg-emerald-500/10 blur-[120px] pointer-events-none"></div>
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-80 h-32 bg-emerald-500/10 blur-[120px] pointer-events-none"></div>
 
     <!-- ============================= -->
     <!-- ENCABEZADO -->
     <!-- ============================= -->
-    <header class="text-center py-12 px-4 relative z-10">
-        <p class="text-emerald-400 font-semibold tracking-widest text-sm mb-3">
+    <header class="text-center py-10 px-4 relative z-10 w-full max-w-4xl mx-auto">
+        <p class="text-emerald-400 font-semibold tracking-widest text-sm mb-2">
             MENÚ
         </p>
-        <h1 class="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-200">
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-200 px-2">
             [ NOMBRE DEL LOCAL ]
         </h1>
-        <p class="text-slate-400 mt-3 text-base md:text-lg max-w-md mx-auto">
+        <p class="text-slate-400 mt-3 text-sm md:text-base max-w-md mx-auto px-2">
             [ Eslogan o descripción del local ]
         </p>
     </header>
@@ -44,38 +60,40 @@
     <!-- ============================= -->
     <!-- CATEGORÍAS -->
     <!-- ============================= -->
-    <nav class="sticky top-4 z-30 flex justify-start md:justify-center gap-2 md:gap-3 overflow-x-auto px-4 py-3 bg-slate-900/70 backdrop-blur-md max-w-3xl mx-auto rounded-full border border-slate-800 shadow-2xl mb-8 whitespace-nowrap scrollbar-none">
-        <button
-            onclick="filtrarMenu('todos', this)"
-            class="categoria-btn bg-emerald-500 text-slate-950 px-5 py-2 rounded-full text-sm font-bold transition-all flex-shrink-0">
-            Todo
-        </button>
-        <button
-            onclick="filtrarMenu('hamburguesas', this)"
-            class="categoria-btn bg-transparent text-slate-300 px-5 py-2 rounded-full text-sm font-semibold hover:bg-slate-800 hover:text-white transition-all flex-shrink-0">
-            Hamburguesas
-        </button>
-        <button
-            onclick="filtrarMenu('completos', this)"
-            class="categoria-btn bg-transparent text-slate-300 px-5 py-2 rounded-full text-sm font-semibold hover:bg-slate-800 hover:text-white transition-all flex-shrink-0">
-            Completos
-        </button>
-        <button
-            onclick="filtrarMenu('papas', this)"
-            class="categoria-btn bg-transparent text-slate-300 px-5 py-2 rounded-full text-sm font-semibold hover:bg-slate-800 hover:text-white transition-all flex-shrink-0">
-            Papas
-        </button>
-        <button
-            onclick="filtrarMenu('bebestibles', this)"
-            class="categoria-btn bg-transparent text-slate-300 px-5 py-2 rounded-full text-sm font-semibold hover:bg-slate-800 hover:text-white transition-all flex-shrink-0">
-            Bebestibles
-        </button>
-    </nav>
+    <div class="sticky top-4 z-30 px-4 w-full max-w-3xl mx-auto mb-6">
+        <nav class="flex justify-start md:justify-center gap-2 overflow-x-auto px-4 py-3 bg-slate-900/80 backdrop-blur-md rounded-full border border-slate-800/80 shadow-2xl whitespace-nowrap scrollbar-none">
+            <button
+                onclick="filtrarMenu('todos', this)"
+                class="categoria-btn bg-emerald-500 text-slate-950 px-5 py-2 rounded-full text-sm font-bold transition-all flex-shrink-0">
+                Todo
+            </button>
+            <button
+                onclick="filtrarMenu('hamburguesas', this)"
+                class="categoria-btn bg-transparent text-slate-300 px-5 py-2 rounded-full text-sm font-semibold hover:bg-slate-800 hover:text-white transition-all flex-shrink-0">
+                Hamburguesas
+            </button>
+            <button
+                onclick="filtrarMenu('completos', this)"
+                class="categoria-btn bg-transparent text-slate-300 px-5 py-2 rounded-full text-sm font-semibold hover:bg-slate-800 hover:text-white transition-all flex-shrink-0">
+                Completos
+            </button>
+            <button
+                onclick="filtrarMenu('papas', this)"
+                class="categoria-btn bg-transparent text-slate-300 px-5 py-2 rounded-full text-sm font-semibold hover:bg-slate-800 hover:text-white transition-all flex-shrink-0">
+                Papas
+            </button>
+            <button
+                onclick="filtrarMenu('bebestibles', this)"
+                class="categoria-btn bg-transparent text-slate-300 px-5 py-2 rounded-full text-sm font-semibold hover:bg-slate-800 hover:text-white transition-all flex-shrink-0">
+                Bebestibles
+            </button>
+        </nav>
+    </div>
 
     <!-- ============================= -->
     <!-- PRODUCTOS -->
     <!-- ============================= -->
-    <main class="max-w-6xl mx-auto px-4 py-4 flex-grow w-full relative z-10">
+    <main class="max-w-6xl mx-auto px-4 py-2 flex-grow w-full relative z-10">
         <div
             id="contenedor-menu"
             class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
@@ -85,12 +103,12 @@
     <!-- ============================= -->
     <!-- BOTÓN DEL CARRITO -->
     <!-- ============================= -->
-    <div class="fixed bottom-6 right-6 z-40">
+    <div class="fixed bottom-5 right-5 z-40">
         <button
             onclick="abrirModalCarrito()"
-            class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold px-6 py-4 rounded-full shadow-2xl flex items-center gap-3 transition-all hover:scale-105">
-            <i class="fa-solid fa-cart-shopping text-lg"></i>
-            <span>Ver Carrito</span>
+            class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold px-5 py-3.5 rounded-full shadow-2xl flex items-center gap-3 transition-all hover:scale-105 active:scale-95">
+            <i class="fa-solid fa-cart-shopping text-base"></i>
+            <span class="text-sm sm:text-base">Ver Carrito</span>
             <span
                 id="contador-carrito"
                 class="bg-slate-950 text-emerald-400 text-xs px-2.5 py-1 rounded-full font-bold">
@@ -114,7 +132,7 @@
                 </h2>
                 <button
                     onclick="cerrarModalCarrito()"
-                    class="text-slate-400 hover:text-white text-xl">
+                    class="text-slate-400 hover:text-white text-xl p-1">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
@@ -165,6 +183,9 @@
     <!-- JAVASCRIPT -->
     <!-- ============================= -->
     <script>
+        // CONFIGURACIÓN DE WHATSAPP
+        const NUMERO_WHATSAPP = "56912345678";
+
         const productos = [
             {
                 id: 1,
@@ -338,23 +359,22 @@
 
             const nombre = document.getElementById("cliente-nombre").value.trim();
             if (!nombre) {
-                alert("Ingresa tu nombre.");
+                alert("Por favor ingresa tu nombre.");
                 return;
             }
 
-            let mensaje = `Hola, soy ${nombre} y quiero hacer un pedido:%0A%0A`;
+            let mensaje = `Hola, mi nombre es *${nombre}* y quiero hacer el siguiente pedido:%0A%0A`;
             let total = 0;
 
             carrito.forEach(producto => {
                 const subtotal = producto.precio * producto.cantidad;
                 total += subtotal;
-                mensaje += `• ${producto.cantidad}x ${producto.nombre} - $${subtotal.toLocaleString("es-CL")}%0A`;
+                mensaje += `• ${producto.cantidad}x ${producto.nombre} ($${subtotal.toLocaleString("es-CL")})%0A`;
             });
 
-            mensaje += `%0A*Total: $${total.toLocaleString("es-CL")}*`;
+            mensaje += `%0A*Total a pagar: $${total.toLocaleString("es-CL")}*`;
 
-            const numeroWhatsApp = "56912345678"; // Cambia por tu número
-            const url = `https://wa.me/${numeroWhatsApp}?text=${mensaje}`;
+            const url = `https://wa.me/${NUMERO_WHATSAPP}?text=${mensaje}`;
 
             window.open(url, "_blank");
         }
