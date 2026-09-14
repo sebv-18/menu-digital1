@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Menú</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Fuente -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+
+    <!-- Iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-gradient-to-b from-slate-950 via-zinc-950 to-black text-white min-h-screen flex flex-col pb-24">
+
+
+    <!-- EFECTO DE FONDO -->
+
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-32 bg-emerald-500/10 blur-[120px] pointer-events-none"></div>
+
+
+    <!-- ============================= -->
+    <!-- ENCABEZADO -->
+    <!-- ============================= -->
+
+    <header class="text-center py-12 px-4 relative z-10">
+
+        <p class="text-emerald-400 font-semibold tracking-widest text-sm mb-3">
+            MENÚ
+        </p>
+
+        <h1 class="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-200">
+            [ NOMBRE DEL LOCAL ]
+        </h1>
+
+        <p class="text-slate-400 mt-3 text-base md:text-lg max-w-md mx-auto">
+            [ Eslogan o descripción del local ]
+        </p>
+
+    </header>
+
+
+    <!-- ============================= -->
+    <!-- CATEGORÍAS -->
+    <!-- ============================= -->
+
+    <nav class="sticky top-4 z-30 flex justify-center gap-2 md:gap-3 overflow-x-auto px-4 py-3 bg-slate-900/70 backdrop-blur-md max-w-3xl mx-auto rounded-full border border-slate-800 shadow-2xl mb-8">
+
+        <button
+            onclick="filtrarMenu('todos', this)"
+            class="categoria-btn bg-emerald-500 text-slate-950 px-5 py-2 rounded-full text-sm font-bold transition-all">
+            Todo
+        </button>
+
+        <button
+            onclick="filtrarMenu('hamburguesas', this)"
+            class="categoria-btn bg-transparent text-slate-300 px-5 py-2 rounded-full text-sm font-semibold hover:bg-slate-800 hover:text-white transition-all">
+            Hamburguesas
+        </button>
+
+        <button
+            onclick="filtrarMenu('completos', this)"
+            class="categoria-btn bg-transparent text-slate-300 px-5 py-2 rounded-full text-sm font-semibold hover:bg-slate-800 hover:text-white transition-all">
+            Completos
+        </button>
+
+        <button
+            onclick="filtrarMenu('papas', this)"
+            class="categoria-btn bg-transparent text-slate-300 px-5 py-2 rounded-full text-sm font-semibold hover:bg-slate-800 hover:text-white transition-all">
+            Papas
+        </button>
+
+        <button
+            onclick="filtrarMenu('bebestibles', this)"
+            class="categoria-btn bg-transparent text-slate-300 px-5 py-2 rounded-full text-sm font-semibold hover:bg-slate-800 hover:text-white transition-all">
+            Bebestibles
+        </button>
+
+    </nav>
+
+
+    <!-- ============================= -->
+    <!-- PRODUCTOS -->
+    <!-- ============================= -->
+
+    <main class="max-w-6xl mx-auto px-4 py-4 flex-grow w-full relative z-10">
+
+        <div
+            id="contenedor-menu"
+            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        </div>
+
+    </main>
+
+
+    <!-- ============================= -->
+    <!-- BOTÓN DEL CARRITO -->
+    <!-- ============================= -->
+
+    <div class="fixed bottom-6 right-6 z-40">
+
+        <button
+            onclick="abrirModalCarrito()"
+            class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold px-6 py-4 rounded-full shadow-2xl flex items-center gap-3 transition-all hover:scale-105">
+
+            <i class="fa-solid fa-cart-shopping text-lg"></i>
+
+            <span>
+                Ver Carrito
+            </span>
+
+            <span
+                id="contador-carrito"
+                class="bg-slate-950 text-emerald-400 text-xs px-2.5 py-1 rounded-full font-bold">
+                0
+            </span>
+
+        </button>
+
+    </div>
+
+
+    <!-- ============================= -->
+    <!-- MODAL CARRITO -->
+    <!-- ============================= -->
+
+    <div
+        id="modal-carrito"
+        class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden justify-center items-center p-4">
+
+        <div
+            class="bg-slate-900 border border-slate-800 rounded-3xl max-w-md w-full p-6 shadow-2xl">
+
+
+            <!-- TÍTULO -->
+
+            <div class="flex justify-between items-center pb-4 border-b border-slate-800">
+
+                <h2 class="text-xl font-bold flex items-center gap-2">
+
+                    <i class="fa-solid fa-bag-shopping text-emerald-400"></i>
+
+                    Tu Pedido
+
+                </h2>
+
+
+                <button
+                    onclick="cerrarModalCarrito()"
+                    class="text-slate-400 hover:text-white text-xl">
+
+                    <i class="fa-solid fa-xmark"></i>
+
+                </button>
+
+            </div>
+
+
+            <!-- PRODUCTOS -->
+
+            <div
+                id="lista-carrito-items"
+                class="py-4 overflow-y-auto space-y-3">
+            </div>
+
+
+            <!-- TOTAL -->
+
+            <div class="pt-4 border-t border-slate-800">
+
+                <div class="flex justify-between items-center mb-4">
+
+                    <span class="text-slate-400 font-medium">
+                        Total:
+                    </span>
+
+                    <span
+                        id="carrito-total"
+                        class="text-2xl font-extrabold text-emerald-400">
+                        $0
+                    </span>
+
+                </div>
+
+
+                <!-- NOMBRE -->
+
+                <input
+                    type="text"
+                    id="cliente-nombre"
+                    placeholder="Tu nombre"
+                    class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white mb-4 focus:outline-none focus:border-emerald-500">
+
+
+                <!-- WHATSAPP -->
+
+                <button
+                    onclick="enviarPedidoWhatsApp()"
+                    class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-3.5 rounded-xl flex justify-center items-center gap-2 transition-all">
+
+                    <i class="fa-brands fa-whatsapp text-lg"></i>
+
+                    Enviar pedido por WhatsApp
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ============================= -->
+    <!-- PIE DE PÁGINA -->
+    <!-- ============================= -->
+
+    <footer
+        class="text-center py-8 text-slate-500 text-sm border-t border-slate-900 mt-12">
+
+        <p>
+            Gracias por preferirnos ❤️
+        </p>
+
+    </footer>
+
+
+    <!-- ============================= -->
+    <!-- JAVASCRIPT -->
+    <!-- ============================= -->
+
+    <script>
+
+
+        /* =============================
+           PRODUCTOS
+        ============================= */
+
+        const productos = [
+
+            {
+                id: 1,
+                nombre: "Hamburguesa Clásica",
+                categoria: "hamburguesas",
+                precio: 5500,
+                descripcion: "Carne de vacuno, queso, lechuga, tomate y salsa de la casa.",
+                imagen: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&auto=format&fit=crop&q=80"
+            },
+
+            {
+                id: 2,
+                nombre: "Hamburguesa Bacon",
+                categoria: "hamburguesas",
+                precio: 6500,
+                descripcion: "Carne, queso cheddar, tocino crujiente y salsa BBQ.",
+                imagen: "https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?w=600&auto=format&fit=crop&q=80"
+            },
+
+            {
+                id: 3,
+                nombre: "Completo Italiano",
+                categoria: "completos",
+                precio: 3000,
+                descripcion: "Vienesa, tomate, palta y mayonesa.",
+                imagen: "https://images.unsplash.com/photo-1612392062631-94dd858cba88?w=600&auto=format&fit=crop&q=80"
+            },
+
+            {
+                id: 4,
+                nombre: "Completo Dinámico",
+                categoria: "completos",
+                precio: 3500,
+                descripcion: "Vienesa, tomate, palta, chucrut y salsa americana.",
+                imagen: "https://images.unsplash.com/photo-1619740455993-9e612b1af08a?w=600&auto=format&fit=crop&q=80"
+            },
+
+            {
+                id: 5,
+                nombre: "Papas Fritas",
+                categoria: "papas",
+                precio: 3000,
+                descripcion: "Papas fritas crujientes, ideales para acompañar tu pedido.",
+                imagen: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=600&auto=format&fit=crop&q=80"
+            },
+
+            {
+                id: 6,
+                nombre: "Papas Cheddar",
+                categoria: "papas",
+                precio: 4500,
+                descripcion: "Papas fritas con queso cheddar y tocino.",
+                imagen: "https://images.unsplash.com/photo-1639024471283-03518883512d?w=600&auto=format&fit=crop&q=80"
+            },
+
+            {
+                id: 7,
+                nombre: "Bebida",
+                categoria: "bebestibles",
+                precio: 1500,
+                descripcion: "Bebida en lata de 350 ml.",
+                imagen: "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=600&auto=format&fit=crop&q=80"
+            },
+
+            {
+                id: 8,
+                nombre: "Jugo Natural",
+                categoria: "bebestibles",
+                precio: 2000,
+                descripcion: "Jugo natural preparado al momento.",
+                imagen: "https://images.unsplash.com/photo-1613478223719-2ab802602423?w=600&auto=format&fit=crop&q=80"
+            }
+
+        ];
+
+
+        /* =============================
+           CARRITO
+        ============================= */
+
+        let carrito = [];
+
+
+        /* =============================
+           MOSTRAR PRODUCTOS
+        ============================= */
+
+        function mostrarProductos(lista) {
+
+            const contenedor =
+                document.getElementById("contenedor-menu");
+
+            contenedor.innerHTML = "";
+
+
+            lista.forEach(producto => {
+
+                contenedor.innerHTML += `
+
+                    <div
+                        class="bg-slate-900/80 border border-slate-800 rounded-2xl overflow-hidden shadow-xl flex flex-col h-full hover:border-emerald-500/50 transition-all duration-300">
+
+
+                        <!-- IMAGEN -->
+
+                        <div class="h-48 overflow-hidden">
+
+                            <img
+                                src="${producto.imagen}"
+                                alt="${producto.nombre}"
+                                class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+
+                        </div>
+
+
+                        <!-- INFORMACIÓN -->
+
+                        <div class="p-5 flex flex-col flex-grow">
+
+                            <h3 class="text-lg font-bold text-white">
+
+                                ${producto.nombre}
+
+                            </h3>
+
+
+                            <p class="text-slate-400 text-sm mt-2 leading-relaxed">
+
+                                ${producto.descripcion}
+
+                            </p>
+
+
+                            <!-- ESTA PARTE QUEDA SIEMPRE ABAJO -->
+
+                            <div class="mt-auto pt-6 flex justify-between items-center">
+
+                                <span class="text-xl font-extrabold text-emerald-400">
+
+                                    $${producto.precio.toLocaleString("es-CL")}
+
+                                </span>
+
+
+                                <button
+                                    onclick="agregarAlCarro(${producto.id})"
+                                    class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 px-4 py-2.5 rounded-xl text-sm font-bold shadow-lg transition-all active:scale-95 flex items-center gap-1.5">
+
+                                    <i class="fa-solid fa-plus text-xs"></i>
+
+                                    Pedir
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                `;
+
+            });
+
+        }
+
+
+        /* =============================
+           AGREGAR AL CARRITO
+        ============================= */
+
+        function agregarAlCarro(id) {
+
+            const producto =
+                productos.find(p => p.id === id);
+
+
+            const existente =
+                carrito.find(p => p.id === id);
+
+
+            if (existente) {
+
+                existente.cantidad++;
+
+            } else {
+
+                carrito.push({
+
+                    ...producto,
+
+                    cantidad: 1
+
+                });
+
+            }
+
+
+            actualizarContador();
+
+        }
+
+
+        /* =============================
+           CONTADOR
+        ============================= */
+
+        function actualizarContador() {
+
+            const cantidad =
+                carrito.reduce(
+                    (total, producto) =>
+                        total + producto.cantidad,
+                    0
+                );
+
+
+            document.getElementById(
+                "contador-carrito"
+            ).innerText = cantidad;
+
+        }
+
+
+        /* =============================
+           ABRIR CARRITO
+        ============================= */
+
+        function abrirModalCarrito() {
+
+            const lista =
+                document.getElementById(
+                    "lista-carrito-items"
+                );
+
+
+            lista.innerHTML = "";
+
+
+            if (carrito.length === 0) {
+
+                lista.innerHTML = `
+
+                    <p class="text-center text-slate-500 py-6">
+
+                        Tu carrito está vacío 🛒
+
+                    </p>
+
+                `;
+
+
+                document.getElementById(
+                    "carrito-total"
+                ).innerText = "$0";
+
+            } else {
+
+                let total = 0;
+
+
+                carrito.forEach(producto => {
+
+                    const subtotal =
+                        producto.precio *
+                        producto.cantidad;
+
+
+                    total += subtotal;
+
+
+                    lista.innerHTML += `
+
+                        <div class="flex justify-between items-center py-3">
+
+
+                            <div>
+
+                                <p class="font-bold text-sm">
+
+                                    ${producto.nombre}
+
+                                </p>
+
+
+                                <p class="text-sm text-slate-400">
+
+                                    ${producto.cantidad} x
+                                    $${producto.precio.toLocaleString("es-CL")}
+
+                                </p>
+
+                            </div>
+
+
+                            <div class="flex items-center gap-2">
+
+                                <button
+                                    onclick="cambiarCantidad(${producto.id}, -1)"
+                                    class="bg-slate-800 hover:bg-slate-700 px-3 py-1 rounded-lg">
+
+                                    -
+
+                                </button>
+
+
+                                <span class="text-sm">
+
+                                    ${producto.cantidad}
+
+                                </span>
+
+
+                                <button
+                                    onclick="cambiarCantidad(${producto.id}, 1)"
+                                    class="bg-slate-800 hover:bg-slate-700 px-3 py-1 rounded-lg">
+
+                                    +
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    `;
+
+                });
+
+
+                document.getElementById(
+                    "carrito-total"
+                ).innerText =
+                    "$" + total.toLocaleString("es-CL");
+
+            }
+
+
+            document.getElementById(
+                "modal-carrito"
+            ).classList.remove("hidden");
+
+
+            document.getElementById(
+                "modal-carrito"
+            ).classList.add("flex");
+
+        }
+
+
+        /* =============================
+           CERRAR CARRITO
+        ============================= */
+
+        function cerrarModalCarrito() {
+
+            document.getElementById(
+                "modal-carrito"
+            ).classList.add("hidden");
+
+
+            document.getElementById(
+                "modal-carrito"
+            ).classList.remove("flex");
+
+        }
+
+
+        /* =============================
+           CAMBIAR CANTIDAD
+        ============================= */
+
+        function cambiarCantidad(id, cambio) {
+
+            const producto =
+                carrito.find(p => p.id === id);
+
+
+            if (producto) {
+
+                producto.cantidad += cambio;
+
+
+                if (producto.cantidad <= 0) {
+
+                    carrito =
+                        carrito.filter(
+                            p => p.id !== id
+                        );
+
+                }
+
+            }
+
+
+            actualizarContador();
+
+            abrirModalCarrito();
+
+        }
+
+
+        /* =============================
+           WHATSAPP
+        ============================= */
+
+        function enviarPedidoWhatsApp() {
+
+            if (carrito.length === 0) {
+
+                alert(
+                    "Agrega al menos un producto al carrito."
+                );
+
+                return;
+
+            }
+
+
+            const nombre =
+                document
+                    .getElementById("cliente-nombre")
+                    .value
+                    .trim();
+
+
+            if (!nombre) {
+
+                alert(
+                    "Ingresa tu nombre."
+                );
+
+                return;
+
+            }
+
+
+            let mensaje =
+                `Hola, soy ${nombre} y quiero hacer un pedido:%0A%0A`;
+
+
+            let total = 0;
+
+
+            carrito.forEach(producto => {
+
+                const subtotal =
+                    producto.precio *
+                    producto.cantidad;
+
+
+                total += subtotal;
+
+
+                mensaje +=
+                    `• ${producto.cantidad}x ${producto.nombre} - $${subtotal.toLocaleString("es-CL")}%0A`;
+
+            });
+
+
+            mensaje +=
+                `%0A*Total: $${total.toLocaleString("es-CL")}*`;
+
+
+            /*
+                CAMBIA ESTE NÚMERO
+                POR EL WHATSAPP DEL LOCAL.
+            */
+
+            const numeroWhatsApp =
+                "56912345678";
+
+
+            const url =
+                `https://wa.me/${numeroWhatsApp}?text=${mensaje}`;
+
+
+            window.open(
+                url,
+                "_blank"
+            );
+
+        }
+
+
+        /* =============================
+           FILTRAR CATEGORÍAS
+        ============================= */
+
+        function filtrarMenu(
+            categoria,
+            boton
+        ) {
+
+            document
+                .querySelectorAll(".categoria-btn")
+                .forEach(btn => {
+
+                    btn.classList.remove(
+                        "bg-emerald-500",
+                        "text-slate-950"
+                    );
+
+
+                    btn.classList.add(
+                        "bg-transparent",
+                        "text-slate-300"
+                    );
+
+                });
+
+
+            boton.classList.remove(
+                "bg-transparent",
+                "text-slate-300"
+            );
+
+
+            boton.classList.add(
+                "bg-emerald-500",
+                "text-slate-950"
+            );
+
+
+            if (categoria === "todos") {
+
+                mostrarProductos(productos);
+
+            } else {
+
+                const filtrados =
+                    productos.filter(
+                        p => p.categoria === categoria
+                    );
+
+
+                mostrarProductos(filtrados);
+
+            }
+
+        }
+
+
+        /* =============================
+           INICIAR PÁGINA
+        ============================= */
+
+        mostrarProductos(productos);
+
+    </script>
+
+</body>
+</html>
