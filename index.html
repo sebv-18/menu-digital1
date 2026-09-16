@@ -1,232 +1,414 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Menú Digital</title>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- Fuente -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap"
+        rel="stylesheet">
 
-    <!-- Iconos -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        * {
-            box-sizing: border-box;
-        }
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            width: 100%;
-            max-width: 100vw;
-            overflow-x: hidden;
-            margin: 0;
-            padding: 0;
         }
-        /* Ocultar barra de desplazamiento en categorías pero mantener funcionalidad */
-        .scrollbar-none::-webkit-scrollbar {
+
+        /* Ocultar barra de desplazamiento */
+        .barra-categorias::-webkit-scrollbar {
             display: none;
         }
-        .scrollbar-none {
+
+        .barra-categorias {
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
     </style>
 </head>
 
-<body class="bg-gradient-to-b from-slate-950 via-zinc-950 to-black text-white min-h-screen flex flex-col pb-28 relative">
 
-    <!-- EFECTO DE FONDO -->
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-80 h-32 bg-emerald-500/10 blur-[120px] pointer-events-none"></div>
+<body
+    class="bg-gradient-to-b from-slate-950 via-zinc-950 to-black text-white min-h-screen flex flex-col pb-24">
 
-    <!-- ============================= -->
-    <!-- ENCABEZADO -->
-    <!-- ============================= -->
-    <header class="text-center py-10 px-4 relative z-10 w-full max-w-4xl mx-auto">
-        <p class="text-emerald-400 font-semibold tracking-widest text-sm mb-2">
-            MENÚ
-        </p>
-        <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-200 px-2">
-            [ NOMBRE DEL LOCAL ]
-        </h1>
-        <p class="text-slate-400 mt-3 text-sm md:text-base max-w-md mx-auto px-2">
-            [ Eslogan o descripción del local ]
-        </p>
-    </header>
 
-    <!-- ============================= -->
-    <!-- CATEGORÍAS -->
-    <!-- ============================= -->
-    <div class="sticky top-4 z-30 px-4 w-full max-w-3xl mx-auto mb-6">
-        <nav class="flex justify-start md:justify-center gap-2 overflow-x-auto px-4 py-3 bg-slate-900/80 backdrop-blur-md rounded-full border border-slate-800/80 shadow-2xl whitespace-nowrap scrollbar-none">
-            <button
-                onclick="filtrarMenu('todos', this)"
-                class="categoria-btn bg-emerald-500 text-slate-950 px-5 py-2 rounded-full text-sm font-bold transition-all flex-shrink-0">
-                Todo
-            </button>
-            <button
-                onclick="filtrarMenu('hamburguesas', this)"
-                class="categoria-btn bg-transparent text-slate-300 px-5 py-2 rounded-full text-sm font-semibold hover:bg-slate-800 hover:text-white transition-all flex-shrink-0">
-                Hamburguesas
-            </button>
-            <button
-                onclick="filtrarMenu('completos', this)"
-                class="categoria-btn bg-transparent text-slate-300 px-5 py-2 rounded-full text-sm font-semibold hover:bg-slate-800 hover:text-white transition-all flex-shrink-0">
-                Completos
-            </button>
-            <button
-                onclick="filtrarMenu('papas', this)"
-                class="categoria-btn bg-transparent text-slate-300 px-5 py-2 rounded-full text-sm font-semibold hover:bg-slate-800 hover:text-white transition-all flex-shrink-0">
-                Papas
-            </button>
-            <button
-                onclick="filtrarMenu('bebestibles', this)"
-                class="categoria-btn bg-transparent text-slate-300 px-5 py-2 rounded-full text-sm font-semibold hover:bg-slate-800 hover:text-white transition-all flex-shrink-0">
-                Bebestibles
-            </button>
-        </nav>
+    <!-- LUZ DE FONDO -->
+
+    <div
+        class="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-32 bg-emerald-500/10 blur-[120px] pointer-events-none">
     </div>
 
-    <!-- ============================= -->
-    <!-- PRODUCTOS -->
-    <!-- ============================= -->
-    <main class="max-w-6xl mx-auto px-4 py-2 flex-grow w-full relative z-10">
+
+    <!-- ==============================
+         ENCABEZADO
+    ================================ -->
+
+    <header class="text-center py-10 px-4 relative z-10">
+
+        <p class="text-emerald-400 font-semibold tracking-widest text-sm mb-3">
+            MENÚ DIGITAL
+        </p>
+
+        <h1
+            class="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-200 tracking-tight">
+
+            [ NOMBRE DEL LOCAL ]
+
+        </h1>
+
+        <p class="text-slate-400 mt-3 text-base md:text-lg max-w-md mx-auto">
+
+            [ Descripción o eslogan del local ]
+
+        </p>
+
+        <!-- UBICACIÓN Y HORARIO -->
+        <div class="flex flex-wrap justify-center items-center gap-4 sm:gap-6 mt-5 text-xs sm:text-sm text-slate-300">
+            <div class="flex items-center gap-2 bg-slate-900/80 border border-slate-800 px-3.5 py-1.5 rounded-full shadow-md">
+                <i class="fa-solid fa-location-dot text-emerald-400"></i>
+                <span>Temuco, Chile</span>
+            </div>
+            <div class="flex items-center gap-2 bg-slate-900/80 border border-slate-800 px-3.5 py-1.5 rounded-full shadow-md">
+                <i class="fa-solid fa-clock text-emerald-400"></i>
+                <span>Lunes a domingo, 18:00–01:00</span>
+            </div>
+        </div>
+
+    </header>
+
+
+
+    <!-- ==============================
+         BARRA DE CATEGORÍAS
+    ================================ -->
+
+    <nav
+        class="sticky top-4 z-30 max-w-2xl w-[calc(100%-2rem)] mx-auto rounded-full border border-slate-800 bg-slate-900/70 backdrop-blur-md shadow-2xl mb-8">
+
+        <div
+            class="barra-categorias flex gap-2 md:gap-3 overflow-x-auto px-3 py-3">
+
+            <!-- TODO -->
+
+            <button
+                onclick="filtrarMenu('todos', this)"
+                class="categoria-btn active bg-emerald-500 text-slate-950 px-5 py-2 rounded-full text-sm font-bold shadow-lg whitespace-nowrap flex-shrink-0">
+
+                Todo
+
+            </button>
+
+
+            <!-- PROMOCIONES -->
+
+            <button
+                onclick="filtrarMenu('promociones', this)"
+                class="categoria-btn bg-transparent text-slate-300 px-5 py-2 rounded-full text-sm font-semibold hover:bg-slate-800 hover:text-white transition-all whitespace-nowrap flex-shrink-0">
+
+                🔥 Promociones
+
+            </button>
+
+
+            <!-- HAMBURGUESAS -->
+
+            <button
+                onclick="filtrarMenu('hamburguesas', this)"
+                class="categoria-btn bg-transparent text-slate-300 px-5 py-2 rounded-full text-sm font-semibold hover:bg-slate-800 hover:text-white transition-all whitespace-nowrap flex-shrink-0">
+
+                🍔 Hamburguesas
+
+            </button>
+
+
+            <!-- COMPLETOS -->
+
+            <button
+                onclick="filtrarMenu('completos', this)"
+                class="categoria-btn bg-transparent text-slate-300 px-5 py-2 rounded-full text-sm font-semibold hover:bg-slate-800 hover:text-white transition-all whitespace-nowrap flex-shrink-0">
+
+                🌭 Completos
+
+            </button>
+
+
+            <!-- PAPAS -->
+
+            <button
+                onclick="filtrarMenu('papas', this)"
+                class="categoria-btn bg-transparent text-slate-300 px-5 py-2 rounded-full text-sm font-semibold hover:bg-slate-800 hover:text-white transition-all whitespace-nowrap flex-shrink-0">
+
+                🍟 Papas
+
+            </button>
+
+
+            <!-- BEBESTIBLES -->
+
+            <button
+                onclick="filtrarMenu('bebestibles', this)"
+                class="categoria-btn bg-transparent text-slate-300 px-5 py-2 rounded-full text-sm font-semibold hover:bg-slate-800 hover:text-white transition-all whitespace-nowrap flex-shrink-0">
+
+                🥤 Bebestibles
+
+            </button>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- ==============================
+         PRODUCTOS
+    ================================ -->
+
+    <main
+        class="max-w-5xl mx-auto px-4 py-4 flex-grow w-full relative z-10">
+
         <div
             id="contenedor-menu"
             class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+
         </div>
+
     </main>
 
-    <!-- ============================= -->
-    <!-- BOTÓN DEL CARRITO -->
-    <!-- ============================= -->
-    <div class="fixed bottom-5 right-5 z-40">
+
+
+    <!-- ==============================
+         BOTÓN CARRITO
+    ================================ -->
+
+    <div class="fixed bottom-6 right-6 z-40">
+
         <button
             onclick="abrirModalCarrito()"
-            class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold px-5 py-3.5 rounded-full shadow-2xl flex items-center gap-3 transition-all hover:scale-105 active:scale-95">
-            <i class="fa-solid fa-cart-shopping text-base"></i>
-            <span class="text-sm sm:text-base">Ver Carrito</span>
+            class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold px-6 py-4 rounded-full shadow-2xl flex items-center gap-3 transition-all hover:scale-105 active:scale-95">
+
+            <i class="fa-solid fa-cart-shopping text-lg"></i>
+
+            <span>
+                Ver Carrito
+            </span>
+
             <span
                 id="contador-carrito"
                 class="bg-slate-950 text-emerald-400 text-xs px-2.5 py-1 rounded-full font-bold">
+
                 0
+
             </span>
+
         </button>
+
     </div>
 
-    <!-- ============================= -->
-    <!-- MODAL CARRITO -->
-    <!-- ============================= -->
+
+
+    <!-- ==============================
+         MODAL CARRITO
+    ================================ -->
+
     <div
         id="modal-carrito"
-        class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden justify-center items-center p-4">
-        <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-md w-full p-6 shadow-2xl">
-            <!-- TÍTULO -->
-            <div class="flex justify-between items-center pb-4 border-b border-slate-800">
-                <h2 class="text-xl font-bold flex items-center gap-2">
+        class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex justify-center items-center p-4">
+
+        <div
+            class="bg-slate-900 border border-slate-800 rounded-3xl max-w-md w-full p-6 shadow-2xl relative flex flex-col max-h-[85vh]">
+
+
+            <!-- TITULO -->
+
+            <div
+                class="flex justify-between items-center pb-4 border-b border-slate-800">
+
+                <h2 class="text-xl font-bold text-white flex items-center gap-2">
+
                     <i class="fa-solid fa-bag-shopping text-emerald-400"></i>
+
                     Tu Pedido
+
                 </h2>
+
+
                 <button
                     onclick="cerrarModalCarrito()"
-                    class="text-slate-400 hover:text-white text-xl p-1">
+                    class="text-slate-400 hover:text-white text-xl">
+
                     <i class="fa-solid fa-xmark"></i>
+
                 </button>
+
             </div>
 
-            <!-- PRODUCTOS -->
+
+
+            <!-- PRODUCTOS DEL CARRITO -->
+
             <div
                 id="lista-carrito-items"
-                class="py-4 overflow-y-auto max-h-60 space-y-3">
+                class="py-4 overflow-y-auto flex-grow space-y-3">
+
             </div>
 
+
+
             <!-- TOTAL -->
-            <div class="pt-4 border-t border-slate-800">
-                <div class="flex justify-between items-center mb-4">
-                    <span class="text-slate-400 font-medium">Total:</span>
+
+            <div
+                class="pt-4 border-t border-slate-800 mt-auto">
+
+                <div
+                    class="flex justify-between items-center mb-4">
+
+                    <span class="text-slate-400 font-medium">
+                        Total a pagar:
+                    </span>
+
                     <span
                         id="carrito-total"
                         class="text-2xl font-extrabold text-emerald-400">
+
                         $0
+
                     </span>
+
                 </div>
 
+
+
                 <!-- NOMBRE -->
-                <input
-                    type="text"
-                    id="cliente-nombre"
-                    placeholder="Tu nombre"
-                    class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white mb-4 focus:outline-none focus:border-emerald-500">
+
+                <div class="mb-4">
+
+                    <label
+                        class="block text-xs text-slate-400 mb-1">
+
+                        Nombre para el pedido:
+
+                    </label>
+
+                    <input
+                        type="text"
+                        id="cliente-nombre"
+                        placeholder="Ej. Carlos Pérez"
+                        class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500">
+
+                </div>
+
+
 
                 <!-- WHATSAPP -->
+
                 <button
                     onclick="enviarPedidoWhatsApp()"
                     class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-3.5 rounded-xl flex justify-center items-center gap-2 transition-all">
+
                     <i class="fa-brands fa-whatsapp text-lg"></i>
+
                     Enviar pedido por WhatsApp
+
                 </button>
+
             </div>
+
         </div>
+
     </div>
 
-    <!-- ============================= -->
-    <!-- PIE DE PÁGINA -->
-    <!-- ============================= -->
-    <footer class="text-center py-8 text-slate-500 text-sm border-t border-slate-900 mt-12">
-        <p>Gracias por preferirnos ❤️</p>
+
+
+    <!-- ==============================
+         FOOTER
+    ================================ -->
+
+    <footer
+        class="text-center py-8 text-slate-500 text-sm border-t border-slate-900 mt-12">
+
+        <p>
+            Gracias por preferirnos ❤️
+        </p>
+
+        <p class="mt-2">
+            Menú digital
+        </p>
+
     </footer>
 
-    <!-- ============================= -->
-    <!-- JAVASCRIPT -->
-    <!-- ============================= -->
+
+
+    <!-- ==============================
+         JAVASCRIPT
+    ================================ -->
+
     <script>
-        // CONFIGURACIÓN DE WHATSAPP
-        const NUMERO_WHATSAPP = "56912345678";
+
+        /* =================================
+            PRODUCTOS
+        ================================= */
 
         const productos = [
+
+            /* HAMBURGUESAS */
+
             {
                 id: 1,
                 nombre: "Hamburguesa Clásica",
                 categoria: "hamburguesas",
                 precio: 5500,
-                descripcion: "Carne de vacuno, queso, lechuga, tomate y salsa de la casa.",
+                descripcion: "Doble carne de vacuno, queso cheddar, lechuga y salsa de la casa.",
                 imagen: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&auto=format&fit=crop&q=80"
             },
+
             {
                 id: 2,
-                nombre: "Hamburguesa Bacon",
+                nombre: "Hamburguesa Bacon BBQ",
                 categoria: "hamburguesas",
-                precio: 6500,
+                precio: 6000,
                 descripcion: "Carne, queso cheddar, tocino crujiente y salsa BBQ.",
                 imagen: "https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?w=600&auto=format&fit=crop&q=80"
             },
+
+            /* COMPLETOS */
+
             {
                 id: 3,
                 nombre: "Completo Italiano",
                 categoria: "completos",
                 precio: 3000,
-                descripcion: "Vienesa, tomate, palta y mayonesa.",
+                descripcion: "Vienesa, palta, tomate y mayonesa.",
                 imagen: "https://images.unsplash.com/photo-1612392062631-94dd858cba88?w=600&auto=format&fit=crop&q=80"
             },
+
             {
                 id: 4,
                 nombre: "Completo Dinámico",
                 categoria: "completos",
                 precio: 3500,
                 descripcion: "Vienesa, tomate, palta, chucrut y salsa americana.",
-                imagen: "https://images.unsplash.com/photo-1619740455993-9e612b1af08a?w=600&auto=format&fit=crop&q=80"
+                imagen: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=600&auto=format&fit=crop&q=80"
             },
+
+            /* PAPAS */
+
             {
                 id: 5,
                 nombre: "Papas Fritas",
                 categoria: "papas",
                 precio: 3000,
-                descripcion: "Papas fritas crujientes, ideales para acompañar tu pedido.",
+                descripcion: "Papas fritas crujientes y doradas.",
                 imagen: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=600&auto=format&fit=crop&q=80"
             },
+
             {
                 id: 6,
                 nombre: "Papas Cheddar",
@@ -235,14 +417,18 @@
                 descripcion: "Papas fritas con queso cheddar y tocino.",
                 imagen: "https://images.unsplash.com/photo-1639024471283-03518883512d?w=600&auto=format&fit=crop&q=80"
             },
+
+            /* BEBESTIBLES */
+
             {
                 id: 7,
-                nombre: "Bebida",
+                nombre: "Bebida en Lata",
                 categoria: "bebestibles",
                 precio: 1500,
-                descripcion: "Bebida en lata de 350 ml.",
+                descripcion: "Bebida de 350 ml bien helada.",
                 imagen: "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=600&auto=format&fit=crop&q=80"
             },
+
             {
                 id: 8,
                 nombre: "Jugo Natural",
@@ -250,153 +436,622 @@
                 precio: 2000,
                 descripcion: "Jugo natural preparado al momento.",
                 imagen: "https://images.unsplash.com/photo-1613478223719-2ab802602423?w=600&auto=format&fit=crop&q=80"
+            },
+
+            /* =================================
+               🔥 PROMOCIONES
+            ================================= */
+
+            {
+                id: 101,
+                nombre: "Promo Completa",
+                categoria: "promociones",
+                precio: 7990,
+                precioAnterior: 9500,
+                descripcion: "Hamburguesa clásica + papas fritas + bebida.",
+                imagen: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&auto=format&fit=crop&q=80"
+            },
+
+            {
+                id: 102,
+                nombre: "Promo 2 Completos",
+                categoria: "promociones",
+                precio: 5990,
+                precioAnterior: 7000,
+                descripcion: "2 completos italianos + 2 bebidas.",
+                imagen: "https://images.unsplash.com/photo-1612392062631-94dd858cba88?w=600&auto=format&fit=crop&q=80"
+            },
+
+            {
+                id: 103,
+                nombre: "Promo Familiar",
+                categoria: "promociones",
+                precio: 14990,
+                precioAnterior: 18000,
+                descripcion: "2 hamburguesas + papas grandes + 2 bebidas.",
+                imagen: "https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=600&auto=format&fit=crop&q=80"
             }
+
         ];
+
+
+
+        /* =================================
+           CARRITO
+        ================================= */
 
         let carrito = [];
 
+
+
+        /* =================================
+           MOSTRAR PRODUCTOS
+        ================================= */
+
         function mostrarProductos(lista) {
-            const contenedor = document.getElementById("contenedor-menu");
+
+            const contenedor =
+                document.getElementById("contenedor-menu");
+
             contenedor.innerHTML = "";
 
-            lista.forEach(producto => {
-                contenedor.innerHTML += `
-                    <div class="bg-slate-900/80 border border-slate-800 rounded-2xl overflow-hidden shadow-xl flex flex-col h-full hover:border-emerald-500/50 transition-all duration-300">
-                        <div class="h-48 overflow-hidden">
-                            <img src="${producto.imagen}" alt="${producto.nombre}" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-                        </div>
-                        <div class="p-5 flex flex-col flex-grow">
-                            <h3 class="text-lg font-bold text-white">${producto.nombre}</h3>
-                            <p class="text-slate-400 text-sm mt-2 leading-relaxed">${producto.descripcion}</p>
-                            <div class="mt-auto pt-6 flex justify-between items-center">
-                                <span class="text-xl font-extrabold text-emerald-400">$${producto.precio.toLocaleString("es-CL")}</span>
-                                <button onclick="agregarAlCarro(${producto.id})" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 px-4 py-2.5 rounded-xl text-sm font-bold shadow-lg transition-all active:scale-95 flex items-center gap-1.5">
-                                    <i class="fa-solid fa-plus text-xs"></i>
-                                    Pedir
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+
+            if (lista.length === 0) {
+
+                contenedor.innerHTML = `
+                    <p class="col-span-full text-center text-slate-500 py-10">
+                        No hay productos en esta categoría.
+                    </p>
                 `;
+
+                return;
+            }
+
+
+
+            lista.forEach(producto => {
+
+
+                const esPromo =
+                    producto.categoria === "promociones";
+
+
+                let precioHTML = `
+                    <span class="text-xl font-extrabold text-emerald-400">
+                        $${producto.precio.toLocaleString("es-CL")}
+                    </span>
+                `;
+
+
+                if (esPromo) {
+
+                    precioHTML = `
+
+                        <div>
+
+                            <span class="block text-sm text-slate-500 line-through">
+
+                                $${producto.precioAnterior.toLocaleString("es-CL")}
+
+                            </span>
+
+                            <span class="text-xl font-extrabold text-emerald-400">
+
+                                $${producto.precio.toLocaleString("es-CL")}
+
+                            </span>
+
+                        </div>
+
+                    `;
+
+                }
+
+
+
+                const tarjeta = `
+
+                    <div
+                        class="group bg-slate-900/80 border border-slate-800 rounded-2xl overflow-hidden shadow-xl hover:border-emerald-500/50 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between">
+
+
+                        <!-- IMAGEN -->
+
+                        <div>
+
+                            <div
+                                class="overflow-hidden h-48 relative">
+
+                                <img
+                                    src="${producto.imagen}"
+                                    alt="${producto.nombre}"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+
+
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-t from-slate-950/60 to-transparent">
+                                </div>
+
+
+                                ${esPromo ? `
+
+                                    <span
+                                        class="absolute top-3 left-3 bg-red-500 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg">
+
+                                        🔥 OFERTA
+
+                                    </span>
+
+                                ` : ""}
+
+                            </div>
+
+
+
+                            <!-- INFORMACIÓN -->
+
+                            <div class="p-5">
+
+                                <h3
+                                    class="text-lg font-bold text-white group-hover:text-emerald-400 transition-colors">
+
+                                    ${producto.nombre}
+
+                                </h3>
+
+
+                                <p
+                                    class="text-slate-400 text-sm mt-2 leading-relaxed">
+
+                                    ${producto.descripcion}
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- PRECIO Y PEDIR -->
+
+                        <div
+                            class="p-5 pt-0 flex justify-between items-center mt-2 gap-3">
+
+
+                            ${precioHTML}
+
+
+                            <button
+                                onclick="agregarAlCarro(${producto.id})"
+                                class="bg-emerald-500 text-slate-950 px-4 py-2 rounded-xl text-sm font-bold hover:bg-emerald-400 transition-all active:scale-95 flex items-center gap-1.5">
+
+                                <i class="fa-solid fa-plus text-xs"></i>
+
+                                Pedir
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                `;
+
+
+                contenedor.innerHTML += tarjeta;
+
             });
+
         }
+
+
+
+        /* =================================
+           AGREGAR AL CARRITO
+        ================================= */
 
         function agregarAlCarro(id) {
-            const producto = productos.find(p => p.id === id);
-            const existente = carrito.find(p => p.id === id);
+
+            const producto =
+                productos.find(p => p.id === id);
+
+
+            const existente =
+                carrito.find(p => p.id === id);
+
 
             if (existente) {
+
                 existente.cantidad++;
+
             } else {
-                carrito.push({ ...producto, cantidad: 1 });
-            }
 
-            actualizarContador();
-        }
-
-        function actualizarContador() {
-            const cantidad = carrito.reduce((total, producto) => total + producto.cantidad, 0);
-            document.getElementById("contador-carrito").innerText = cantidad;
-        }
-
-        function abrirModalCarrito() {
-            const lista = document.getElementById("lista-carrito-items");
-            lista.innerHTML = "";
-
-            if (carrito.length === 0) {
-                lista.innerHTML = `<p class="text-center text-slate-500 py-6">Tu carrito está vacío 🛒</p>`;
-                document.getElementById("carrito-total").innerText = "$0";
-            } else {
-                let total = 0;
-                carrito.forEach(producto => {
-                    const subtotal = producto.precio * producto.cantidad;
-                    total += subtotal;
-
-                    lista.innerHTML += `
-                        <div class="flex justify-between items-center py-3 border-b border-slate-800/50">
-                            <div>
-                                <p class="font-bold text-sm">${producto.nombre}</p>
-                                <p class="text-sm text-slate-400">${producto.cantidad} x $${producto.precio.toLocaleString("es-CL")}</p>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <button onclick="cambiarCantidad(${producto.id}, -1)" class="bg-slate-800 hover:bg-slate-700 px-3 py-1 rounded-lg">-</button>
-                                <span class="text-sm">${producto.cantidad}</span>
-                                <button onclick="cambiarCantidad(${producto.id}, 1)" class="bg-slate-800 hover:bg-slate-700 px-3 py-1 rounded-lg">+</button>
-                            </div>
-                        </div>
-                    `;
+                carrito.push({
+                    ...producto,
+                    cantidad: 1
                 });
 
-                document.getElementById("carrito-total").innerText = "$" + total.toLocaleString("es-CL");
             }
 
-            document.getElementById("modal-carrito").classList.remove("hidden");
-            document.getElementById("modal-carrito").classList.add("flex");
+
+            actualizarContadorCarrito();
+
         }
+
+
+
+        /* =================================
+           CONTADOR
+        ================================= */
+
+        function actualizarContadorCarrito() {
+
+            const totalItems =
+                carrito.reduce(
+                    (total, item) =>
+                    total + item.cantidad,
+                    0
+                );
+
+
+            document.getElementById(
+                "contador-carrito"
+            ).innerText = totalItems;
+
+        }
+
+
+
+        /* =================================
+           ABRIR CARRITO
+        ================================= */
+
+        function abrirModalCarrito() {
+
+            const lista =
+                document.getElementById(
+                    "lista-carrito-items"
+                );
+
+
+            lista.innerHTML = "";
+
+
+            if (carrito.length === 0) {
+
+                lista.innerHTML = `
+
+                    <p class="text-center text-slate-500 py-8">
+
+                        Tu carrito está vacío 🛒
+
+                    </p>
+
+                `;
+
+
+                document.getElementById(
+                    "carrito-total"
+                ).innerText = "$0";
+
+
+                document
+                    .getElementById("modal-carrito")
+                    .classList.remove("hidden");
+
+
+                return;
+
+            }
+
+
+            let totalPrecio = 0;
+
+
+
+            carrito.forEach(item => {
+
+                const precioTotalItem =
+                    item.precio * item.cantidad;
+
+
+                totalPrecio +=
+                    precioTotalItem;
+
+
+
+                lista.innerHTML += `
+
+                    <div
+                        class="py-3 flex justify-between items-center">
+
+
+                        <div>
+
+                            <h4
+                                class="font-bold text-white text-sm">
+
+                                ${item.nombre}
+
+                            </h4>
+
+
+                            <span
+                                class="xs text-slate-400">
+
+                                $${item.precio.toLocaleString("es-CL")}
+                                x
+                                ${item.cantidad}
+
+                            </span>
+
+                        </div>
+
+
+
+                        <div
+                            class="flex items-center gap-3">
+
+
+                            <span
+                                class="font-bold text-emerald-400 text-sm">
+
+                                $${precioTotalItem.toLocaleString("es-CL")}
+
+                            </span>
+
+
+                            <button
+                                onclick="cambiarCantidad(${item.id}, -1)"
+                                class="w-7 h-7 bg-slate-800 rounded-lg text-slate-300 hover:text-white">
+
+                                -
+
+                            </button>
+
+
+                            <button
+                                onclick="cambiarCantidad(${item.id}, 1)"
+                                class="w-7 h-7 bg-slate-800 rounded-lg text-slate-300 hover:text-white">
+
+                                +
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                `;
+
+            });
+
+
+
+            document.getElementById(
+                "carrito-total"
+            ).innerText =
+                `$${totalPrecio.toLocaleString("es-CL")}`;
+
+
+            document
+                .getElementById("modal-carrito")
+                .classList.remove("hidden");
+
+        }
+
+
+
+        /* =================================
+           CERRAR CARRITO
+        ================================= */
 
         function cerrarModalCarrito() {
-            document.getElementById("modal-carrito").classList.add("hidden");
-            document.getElementById("modal-carrito").classList.remove("flex");
+
+            document
+                .getElementById("modal-carrito")
+                .classList.add("hidden");
+
         }
+
+
+
+        /* =================================
+           CAMBIAR CANTIDAD
+        ================================= */
 
         function cambiarCantidad(id, cambio) {
-            const producto = carrito.find(p => p.id === id);
-            if (producto) {
-                producto.cantidad += cambio;
-                if (producto.cantidad <= 0) {
-                    carrito = carrito.filter(p => p.id !== id);
+
+            const item =
+                carrito.find(p => p.id === id);
+
+
+            if (item) {
+
+                item.cantidad += cambio;
+
+
+                if (item.cantidad <= 0) {
+
+                    carrito =
+                        carrito.filter(
+                            p => p.id !== id
+                        );
+
                 }
+
             }
-            actualizarContador();
+
+
+            actualizarContadorCarrito();
+
             abrirModalCarrito();
+
         }
+
+
+
+        /* =================================
+           WHATSAPP
+        ================================= */
 
         function enviarPedidoWhatsApp() {
+
             if (carrito.length === 0) {
-                alert("Agrega al menos un producto al carrito.");
+
+                alert(
+                    "Agrega al menos un producto al carrito."
+                );
+
                 return;
+
             }
 
-            const nombre = document.getElementById("cliente-nombre").value.trim();
+
+            const nombre =
+                document
+                    .getElementById("cliente-nombre")
+                    .value
+                    .trim();
+
+
             if (!nombre) {
-                alert("Por favor ingresa tu nombre.");
+
+                alert(
+                    "Por favor ingresa tu nombre."
+                );
+
                 return;
+
             }
 
-            let mensaje = `Hola, mi nombre es *${nombre}* y quiero hacer el siguiente pedido:%0A%0A`;
+
+
+            let mensaje =
+                `Hola, mi nombre es *${nombre}* y quiero hacer el siguiente pedido:\n\n`;
+
+
             let total = 0;
 
-            carrito.forEach(producto => {
-                const subtotal = producto.precio * producto.cantidad;
+
+
+            carrito.forEach(item => {
+
+                const subtotal =
+                    item.precio *
+                    item.cantidad;
+
+
                 total += subtotal;
-                mensaje += `• ${producto.cantidad}x ${producto.nombre} ($${subtotal.toLocaleString("es-CL")})%0A`;
+
+
+                mensaje +=
+                    `• ${item.cantidad}x ${item.nombre} ($${subtotal.toLocaleString("es-CL")})\n`;
+
             });
 
-            mensaje += `%0A*Total a pagar: $${total.toLocaleString("es-CL")}*`;
 
-            const url = `https://wa.me/${NUMERO_WHATSAPP}?text=${mensaje}`;
 
-            window.open(url, "_blank");
+            mensaje +=
+                `\n*Total a pagar: $${total.toLocaleString("es-CL")}*`;
+
+
+
+            /*
+                CAMBIA ESTE NÚMERO
+                POR EL WHATSAPP DEL LOCAL
+            */
+
+            const numeroWhatsApp =
+                "56912345678";
+
+
+            const url =
+                `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
+
+
+            window.open(
+                url,
+                "_blank"
+            );
+
         }
 
-        function filtrarMenu(categoria, boton) {
-            document.querySelectorAll(".categoria-btn").forEach(btn => {
-                btn.classList.remove("bg-emerald-500", "text-slate-950");
-                btn.classList.add("bg-transparent", "text-slate-300");
-            });
 
-            boton.classList.remove("bg-transparent", "text-slate-300");
-            boton.classList.add("bg-emerald-500", "text-slate-950");
+
+        /* =================================
+           FILTRAR MENÚ
+        ================================= */
+
+        function filtrarMenu(
+            categoria,
+            botonPresionado
+        ) {
+
+
+            document
+                .querySelectorAll(".categoria-btn")
+                .forEach(btn => {
+
+                    btn.classList.remove(
+                        "active",
+                        "bg-emerald-500",
+                        "text-slate-950"
+                    );
+
+                    btn.classList.add(
+                        "bg-transparent",
+                        "text-slate-300"
+                    );
+
+                });
+
+
+
+            botonPresionado.classList.remove(
+                "bg-transparent",
+                "text-slate-300"
+            );
+
+
+            botonPresionado.classList.add(
+                "active",
+                "bg-emerald-500",
+                "text-slate-950"
+            );
+
+
 
             if (categoria === "todos") {
+
                 mostrarProductos(productos);
+
             } else {
-                const filtrados = productos.filter(p => p.categoria === categoria);
+
+                const filtrados =
+                    productos.filter(
+                        producto =>
+                        producto.categoria === categoria
+                    );
+
+
                 mostrarProductos(filtrados);
+
             }
+
         }
 
+
+
+        /* =================================
+           INICIAR
+        ================================= */
+
         mostrarProductos(productos);
+
     </script>
+
 </body>
+
 </html>
