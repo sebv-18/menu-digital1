@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="h-full overflow-hidden">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -11,69 +11,83 @@
     <!-- Iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            overscroll-behavior-y: none; /* Evita el rebote de la pantalla en móviles */
-        }
-        html {
-            overscroll-behavior-y: none;
+        /* Forzar bloqueo total de rebote en iOS y Android */
+        html, body {
+            position: fixed;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            overscroll-behavior: none;
+            -webkit-overflow-scrolling: touch;
         }
     </style>
 </head>
-<body class="bg-gradient-to-b from-slate-950 via-zinc-950 to-black text-white min-h-screen flex flex-col pb-24">
+<body class="bg-gradient-to-b from-slate-950 via-zinc-950 to-black text-white font-['Plus_Jakarta_Sans'] flex flex-col">
 
-    <!-- EFECTO DE FONDO -->
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-32 bg-emerald-500/10 blur-[120px] pointer-events-none"></div>
+    <!-- CONTENEDOR PRINCIPAL CON SCROLL INTERNO -->
+    <div id="scroll-container" class="flex-1 overflow-y-auto w-full h-full pb-32">
+
+        <!-- EFECTO DE FONDO -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-32 bg-emerald-500/10 blur-[120px] pointer-events-none"></div>
+
+        <!-- ============================= -->
+        <!-- ENCABEZADO -->
+        <!-- ============================= -->
+        <header class="text-center py-10 px-4 relative z-10">
+            <p class="text-emerald-400 font-semibold tracking-widest text-sm mb-3">
+                MENÚ
+            </p>
+            <h1 class="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-200">
+                [ NOMBRE DEL LOCAL ]
+            </h1>
+            <p class="text-slate-400 mt-3 text-base md:text-lg max-w-md mx-auto">
+                [ Eslogan o descripción del local ]
+            </p>
+        </header>
+
+        <!-- ============================= -->
+        <!-- CATEGORÍAS -->
+        <!-- ============================= -->
+        <nav class="sticky top-4 z-30 flex justify-center gap-2 md:gap-3 overflow-x-auto px-4 py-3 bg-slate-900/90 backdrop-blur-md max-w-3xl mx-auto rounded-full border border-slate-800 shadow-2xl mb-8 mx-4 md:mx-auto">
+            <button onclick="filtrarMenu('todos', this)" class="categoria-btn bg-emerald-500 text-slate-950 px-5 py-2 rounded-full text-sm font-bold transition-all whitespace-nowrap">
+               Todo
+           </button>
+            <button onclick="filtrarMenu('hamburguesas', this)" class="categoria-btn bg-transparent text-slate-300 px-5 py-2 rounded-full text-sm font-semibold hover:bg-slate-800 hover:text-white transition-all whitespace-nowrap">
+               Hamburguesas
+           </button>
+            <button onclick="filtrarMenu('completos', this)" class="categoria-btn bg-transparent text-slate-300 px-5 py-2 rounded-full text-sm font-semibold hover:bg-slate-800 hover:text-white transition-all whitespace-nowrap">
+               Completos
+           </button>
+            <button onclick="filtrarMenu('papas', this)" class="categoria-btn bg-transparent text-slate-300 px-5 py-2 rounded-full text-sm font-semibold hover:bg-slate-800 hover:text-white transition-all whitespace-nowrap">
+               Papas
+           </button>
+            <button onclick="filtrarMenu('bebestibles', this)" class="categoria-btn bg-transparent text-slate-300 px-5 py-2 rounded-full text-sm font-semibold hover:bg-slate-800 hover:text-white transition-all whitespace-nowrap">
+               Bebestibles
+           </button>
+        </nav>
+
+        <!-- ============================= -->
+        <!-- PRODUCTOS -->
+        <!-- ============================= -->
+        <main class="max-w-6xl mx-auto px-4 w-full relative z-10">
+            <div id="contenedor-menu" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            </div>
+        </main>
+
+        <!-- ============================= -->
+        <!-- PIE DE PÁGINA -->
+        <!-- ============================= -->
+        <footer class="text-center py-8 text-slate-500 text-sm border-t border-slate-900/50 mt-16">
+            <p>Gracias por preferirnos ❤️</p>
+        </footer>
+
+    </div>
 
     <!-- ============================= -->
-    <!-- ENCABEZADO -->
-    <!-- ============================= -->
-    <header class="text-center py-12 px-4 relative z-10">
-        <p class="text-emerald-400 font-semibold tracking-widest text-sm mb-3">
-            MENÚ
-        </p>
-        <h1 class="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-200">
-            [ NOMBRE DEL LOCAL ]
-        </h1>
-        <p class="text-slate-400 mt-3 text-base md:text-lg max-w-md mx-auto">
-            [ Eslogan o descripción del local ]
-        </p>
-    </header>
-
-    <!-- ============================= -->
-    <!-- CATEGORÍAS -->
-    <!-- ============================= -->
-    <nav class="sticky top-4 z-30 flex justify-center gap-2 md:gap-3 overflow-x-auto px-4 py-3 bg-slate-900/75 backdrop-blur-md max-w-3xl mx-auto rounded-full border border-slate-800 shadow-2xl mb-8">
-        <button onclick="filtrarMenu('todos', this)" class="categoria-btn bg-emerald-500 text-slate-950 px-5 py-2 rounded-full text-sm font-bold transition-all whitespace-nowrap">
-           Todo
-       </button>
-        <button onclick="filtrarMenu('hamburguesas', this)" class="categoria-btn bg-transparent text-slate-300 px-5 py-2 rounded-full text-sm font-semibold hover:bg-slate-800 hover:text-white transition-all whitespace-nowrap">
-           Hamburguesas
-       </button>
-        <button onclick="filtrarMenu('completos', this)" class="categoria-btn bg-transparent text-slate-300 px-5 py-2 rounded-full text-sm font-semibold hover:bg-slate-800 hover:text-white transition-all whitespace-nowrap">
-           Completos
-       </button>
-        <button onclick="filtrarMenu('papas', this)" class="categoria-btn bg-transparent text-slate-300 px-5 py-2 rounded-full text-sm font-semibold hover:bg-slate-800 hover:text-white transition-all whitespace-nowrap">
-           Papas
-       </button>
-        <button onclick="filtrarMenu('bebestibles', this)" class="categoria-btn bg-transparent text-slate-300 px-5 py-2 rounded-full text-sm font-semibold hover:bg-slate-800 hover:text-white transition-all whitespace-nowrap">
-           Bebestibles
-       </button>
-    </nav>
-
-    <!-- ============================= -->
-    <!-- PRODUCTOS -->
-    <!-- ============================= -->
-    <main class="max-w-6xl mx-auto px-4 py-4 flex-grow w-full relative z-10">
-        <div id="contenedor-menu" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        </div>
-    </main>
-
-    <!-- ============================= -->
-    <!-- BOTÓN DEL CARRITO -->
+    <!-- BOTÓN DEL CARRITO (Flotante) -->
     <!-- ============================= -->
     <div class="fixed bottom-6 right-6 z-40">
-        <button onclick="abrirModalCarrito()" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold px-6 py-4 rounded-full shadow-2xl flex items-center gap-3 transition-all hover:scale-105">
+        <button onclick="abrirModalCarrito()" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold px-6 py-4 rounded-full shadow-2xl flex items-center gap-3 transition-all hover:scale-105 active:scale-95">
             <i class="fa-solid fa-cart-shopping text-lg"></i>
             <span>Ver Carrito</span>
             <span id="contador-carrito" class="bg-slate-950 text-emerald-400 text-xs px-2.5 py-1 rounded-full font-bold">
@@ -99,13 +113,12 @@
                </button>
             </div>
 
-            <!-- PRODUCTOS (Con scroll si es largo) -->
+            <!-- PRODUCTOS -->
             <div id="lista-carrito-items" class="py-4 overflow-y-auto space-y-3 flex-grow">
            </div>
 
-            <!-- CONFIGURACIÓN DEL PEDIDO (Retiro / Reparto) -->
+            <!-- CONFIGURACIÓN DEL PEDIDO -->
             <div class="pt-4 border-t border-slate-800 space-y-3">
-               <!-- Tipo de entrega -->
                <div>
                    <label class="block text-xs font-semibold text-slate-400 mb-1.5">TIPO DE ENTREGA</label>
                    <div class="grid grid-cols-2 gap-2">
@@ -118,15 +131,12 @@
                    </div>
                </div>
 
-               <!-- Nombre -->
                <input type="text" id="cliente-nombre" placeholder="Tu nombre" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-emerald-500">
 
-               <!-- Dirección (Solo se muestra si es reparto) -->
                <div id="contenedor-direccion" class="hidden">
                    <input type="text" id="cliente-direccion" placeholder="Dirección de entrega (Calle, N° de depto/casa)" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-emerald-500">
                </div>
 
-               <!-- TOTAL -->
                <div class="flex justify-between items-center py-2">
                    <span class="text-slate-400 font-medium text-sm">Total a pagar:</span>
                    <span id="carrito-total" class="text-2xl font-extrabold text-emerald-400">
@@ -134,7 +144,6 @@
                    </span>
                </div>
 
-               <!-- WHATSAPP -->
                <button onclick="enviarPedidoWhatsApp()" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-3.5 rounded-xl flex justify-center items-center gap-2 transition-all">
                    <i class="fa-brands fa-whatsapp text-lg"></i>
                    Enviar pedido por WhatsApp
@@ -142,13 +151,6 @@
             </div>
         </div>
     </div>
-
-    <!-- ============================= -->
-    <!-- PIE DE PÁGINA -->
-    <!-- ============================= -->
-    <footer class="text-center py-8 text-slate-500 text-sm border-t border-slate-900 mt-12">
-        <p>Gracias por preferirnos ❤️</p>
-    </footer>
 
     <!-- ============================= -->
     <!-- JAVASCRIPT -->
@@ -291,15 +293,11 @@
             renderizarItemsCarrito();
             document.getElementById("modal-carrito").classList.remove("hidden");
             document.getElementById("modal-carrito").classList.add("flex");
-            // Bloquea el scroll del fondo cuando el carrito está abierto
-            document.body.style.overflow = 'hidden';
         }
 
         function cerrarModalCarrito() {
             document.getElementById("modal-carrito").classList.add("hidden");
             document.getElementById("modal-carrito").classList.remove("flex");
-            // Restaura el scroll del fondo
-            document.body.style.overflow = 'auto';
         }
 
         function renderizarItemsCarrito() {
@@ -368,7 +366,7 @@
 
             let mensaje = `Hola, soy *${nombre}* (%0A📦 *Tipo de entrega:* ${tipoEntrega === 'retiro' ? 'Retiro en Local' : 'Reparto a domicilio'}`;
             
-            if (tipoEntregs === 'reparto') {
+            if (tipoEntrega === 'reparto') {
                 mensaje += `%0A📍 *Dirección:* ${direccion}`;
             }
 
