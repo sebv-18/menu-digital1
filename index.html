@@ -21,68 +21,68 @@
     </style>
 </head>
 
-<body class="bg-gradient-to-b from-slate-950 via-zinc-950 to-black text-white min-h-screen flex flex-col pb-24">
+<body class="bg-gradient-to-b from-slate-950 via-zinc-950 to-black text-white min-h-screen flex flex-col pb-28">
 
     <!-- EFECTO DE FONDO -->
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-32 bg-emerald-500/10 blur-[120px] pointer-events-none"></div>
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-80 h-32 bg-emerald-500/10 blur-[100px] pointer-events-none"></div>
 
     <!-- ENCABEZADO -->
-    <header class="text-center py-12 px-4 relative z-10">
-        <p class="text-emerald-400 font-semibold tracking-widest text-sm mb-3">MENÚ</p>
-        <h1 class="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-200">
+    <header class="text-center py-8 px-4 relative z-10">
+        <p class="text-emerald-400 font-semibold tracking-widest text-xs mb-2">MENÚ</p>
+        <h1 class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-200">
             [ NOMBRE DEL LOCAL ]
         </h1>
-        <p class="text-slate-400 mt-3 text-base md:text-lg max-w-md mx-auto">
+        <p class="text-slate-400 mt-2 text-sm max-w-xs mx-auto">
             [ Eslogan o descripción del local ]
         </p>
     </header>
 
-    <!-- CATEGORÍAS -->
-    <nav class="sticky top-4 z-30 flex justify-center gap-2 md:gap-3 overflow-x-auto px-4 py-3 bg-slate-900/70 backdrop-blur-md max-w-3xl mx-auto rounded-full border border-slate-800 shadow-2xl mb-8">
-        <button onclick="filtrarMenu('todos', this)" class="categoria-btn bg-emerald-500 text-slate-950 px-5 py-2 rounded-full text-sm font-bold transition-all">Todo</button>
-        <button onclick="filtrarMenu('hamburguesas', this)" class="categoria-btn bg-transparent text-slate-300 px-5 py-2 rounded-full text-sm font-semibold hover:bg-slate-800 hover:text-white transition-all">Hamburguesas</button>
-        <button onclick="filtrarMenu('completos', this)" class="categoria-btn bg-transparent text-slate-300 px-5 py-2 rounded-full text-sm font-semibold hover:bg-slate-800 hover:text-white transition-all">Completos</button>
-        <button onclick="filtrarMenu('papas', this)" class="categoria-btn bg-transparent text-slate-300 px-5 py-2 rounded-full text-sm font-semibold hover:bg-slate-800 hover:text-white transition-all">Papas</button>
-        <button onclick="filtrarMenu('bebestibles', this)" class="categoria-btn bg-transparent text-slate-300 px-5 py-2 rounded-full text-sm font-semibold hover:bg-slate-800 hover:text-white transition-all">Bebestibles</button>
+    <!-- CATEGORÍAS (Scroll horizontal optimizado para dedo) -->
+    <nav class="sticky top-3 z-30 flex gap-2 overflow-x-auto px-4 py-3 bg-slate-900/80 backdrop-blur-md border-y border-slate-800/80 shadow-lg no-scrollbar mb-6">
+        <button onclick="filtrarMenu('todos', this)" class="categoria-btn bg-emerald-500 text-slate-950 px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap transition-all">Todo</button>
+        <button onclick="filtrarMenu('hamburguesas', this)" class="categoria-btn bg-slate-800/80 text-slate-300 px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all">Hamburguesas</button>
+        <button onclick="filtrarMenu('completos', this)" class="categoria-btn bg-slate-800/80 text-slate-300 px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all">Completos</button>
+        <button onclick="filtrarMenu('papas', this)" class="categoria-btn bg-slate-800/80 text-slate-300 px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all">Papas</button>
+        <button onclick="filtrarMenu('bebestibles', this)" class="categoria-btn bg-slate-800/80 text-slate-300 px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all">Bebestibles</button>
     </nav>
 
-    <!-- PRODUCTOS -->
-    <main class="max-w-6xl mx-auto px-4 py-4 flex-grow w-full relative z-10">
-        <div id="contenedor-menu" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"></div>
+    <!-- PRODUCTOS (Diseño en una columna ideal para celulares) -->
+    <main class="max-w-md mx-auto px-4 flex-grow w-full relative z-10">
+        <div id="contenedor-menu" class="space-y-4"></div>
     </main>
 
-    <!-- BOTÓN DEL CARRITO -->
-    <div class="fixed bottom-6 right-6 z-40">
-        <button onclick="abrirModalCarrito()" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold px-6 py-4 rounded-full shadow-2xl flex items-center gap-3 transition-all hover:scale-105">
-            <i class="fa-solid fa-cart-shopping text-lg"></i>
-            <span>Ver Carrito</span>
-            <span id="contador-carrito" class="bg-slate-950 text-emerald-400 text-xs px-2.5 py-1 rounded-full font-bold">0</span>
+    <!-- BOTÓN DEL CARRITO FLOTANTE (Mejor posicionado) -->
+    <div class="fixed bottom-5 left-0 right-0 z-40 px-4 flex justify-center pointer-events-none">
+        <button onclick="abrirModalCarrito()" class="pointer-events-auto bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold px-6 py-3.5 rounded-full shadow-xl flex items-center gap-3 transition-all active:scale-95 border border-emerald-400/40">
+            <i class="fa-solid fa-cart-shopping text-base"></i>
+            <span class="text-sm">Ver Carrito</span>
+            <span id="contador-carrito" class="bg-slate-950 text-emerald-400 text-xs px-2 py-0.5 rounded-full font-bold">0</span>
         </button>
     </div>
 
-    <!-- MODAL CARRITO -->
-    <div id="modal-carrito" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden justify-center items-center p-4">
-        <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-md w-full p-6 shadow-2xl max-h-[90vh] overflow-y-auto">
+    <!-- MODAL CARRITO (Optimizado para pantalla completa en móviles) -->
+    <div id="modal-carrito" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden justify-end flex-col sm:justify-center sm:items-center sm:p-4">
+        <div class="bg-slate-900 border-t sm:border border-slate-800 rounded-t-3xl sm:rounded-3xl w-full sm:max-w-md p-5 shadow-2xl max-h-[85vh] flex flex-col">
 
             <!-- TÍTULO -->
-            <div class="flex justify-between items-center pb-4 border-b border-slate-800">
-                <h2 class="text-xl font-bold flex items-center gap-2">
+            <div class="flex justify-between items-center pb-3 border-b border-slate-800">
+                <h2 class="text-lg font-bold flex items-center gap-2">
                     <i class="fa-solid fa-bag-shopping text-emerald-400"></i>
                     Tu Pedido
                 </h2>
-                <button onclick="cerrarModalCarrito()" class="text-slate-400 hover:text-white text-xl">
-                    <i class="fa-solid fa-xmark"></i>
+                <button onclick="cerrarModalCarrito()" class="text-slate-400 hover:text-white p-2">
+                    <i class="fa-solid fa-xmark text-xl"></i>
                 </button>
             </div>
 
-            <!-- PRODUCTOS -->
-            <div id="lista-carrito-items" class="py-4 space-y-3"></div>
+            <!-- PRODUCTOS EN EL CARRITO -->
+            <div id="lista-carrito-items" class="py-3 space-y-3 overflow-y-auto flex-grow divide-y divide-slate-800/40"></div>
 
-            <!-- TOTAL -->
-            <div class="pt-4 border-t border-slate-800">
-                <div class="flex justify-between items-center mb-4">
-                    <span class="text-slate-400 font-medium">Total:</span>
-                    <span id="carrito-total" class="text-2xl font-extrabold text-emerald-400">$0</span>
+            <!-- TOTAL Y FORMULARIO -->
+            <div class="pt-3 border-t border-slate-800 mt-auto">
+                <div class="flex justify-between items-center mb-3">
+                    <span class="text-slate-400 text-sm font-medium">Total:</span>
+                    <span id="carrito-total" class="text-xl font-extrabold text-emerald-400">$0</span>
                 </div>
 
                 <!-- NOMBRE -->
@@ -90,38 +90,33 @@
 
                 <!-- TIPO DE ENTREGA -->
                 <div class="mb-3">
-                    <label class="block text-sm text-slate-400 mb-2">Tipo de entrega:</label>
+                    <label class="block text-xs text-slate-400 mb-1.5 font-medium">Tipo de entrega:</label>
                     <div class="grid grid-cols-2 gap-2">
-                        <label class="flex items-center justify-center gap-2 bg-slate-950 border border-slate-800 rounded-xl p-3 cursor-pointer hover:border-emerald-500 transition-all">
+                        <label class="flex items-center justify-center gap-2 bg-slate-950 border border-slate-800 rounded-xl p-2.5 cursor-pointer hover:border-emerald-500 transition-all">
                             <input type="radio" name="tipo-entrega" value="retiro" checked onclick="toggleDireccion()" class="accent-emerald-500">
-                            <span class="text-sm font-semibold">Retiro en local</span>
+                            <span class="text-xs font-semibold">Retiro local</span>
                         </label>
-                        <label class="flex items-center justify-center gap-2 bg-slate-950 border border-slate-800 rounded-xl p-3 cursor-pointer hover:border-emerald-500 transition-all">
+                        <label class="flex items-center justify-center gap-2 bg-slate-950 border border-slate-800 rounded-xl p-2.5 cursor-pointer hover:border-emerald-500 transition-all">
                             <input type="radio" name="tipo-entrega" value="reparto" onclick="toggleDireccion()" class="accent-emerald-500">
-                            <span class="text-sm font-semibold">Con reparto</span>
+                            <span class="text-xs font-semibold">Reparto</span>
                         </label>
                     </div>
                 </div>
 
                 <!-- DIRECCIÓN (Oculta por defecto) -->
-                <div id="contenedor-direccion" class="mb-4 hidden">
-                    <input type="text" id="cliente-direccion" placeholder="Dirección de entrega (Calle, número, depto)" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-emerald-500">
+                <div id="contenedor-direccion" class="mb-3 hidden">
+                    <input type="text" id="cliente-direccion" placeholder="Dirección (Calle, número, depto)" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-emerald-500">
                 </div>
 
                 <!-- WHATSAPP -->
-                <button onclick="enviarPedidoWhatsApp()" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-3.5 rounded-xl flex justify-center items-center gap-2 transition-all">
+                <button onclick="enviarPedidoWhatsApp()" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-3 rounded-xl flex justify-center items-center gap-2 text-sm transition-all shadow-lg active:scale-95">
                     <i class="fa-brands fa-whatsapp text-lg"></i>
-                    Enviar pedido por WhatsApp
+                    Enviar por WhatsApp
                 </button>
             </div>
 
         </div>
     </div>
-
-    <!-- PIE DE PÁGINA -->
-    <footer class="text-center py-8 text-slate-500 text-sm border-t border-slate-900 mt-12">
-        <p>Gracias por preferirnos ❤️</p>
-    </footer>
 
     <!-- JAVASCRIPT -->
     <script>
@@ -130,7 +125,7 @@
             { id: 2, nombre: "Hamburguesa Bacon", categoria: "hamburguesas", precio: 6500, descripcion: "Carne, queso cheddar, tocino crujiente y salsa BBQ.", imagen: "https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?w=600&auto=format&fit=crop&q=80" },
             { id: 3, nombre: "Completo Italiano", categoria: "completos", precio: 3000, descripcion: "Vienesa, tomate, palta y mayonesa.", imagen: "https://images.unsplash.com/photo-1612392062631-94dd858cba88?w=600&auto=format&fit=crop&q=80" },
             { id: 4, nombre: "Completo Dinámico", categoria: "completos", precio: 3500, descripcion: "Vienesa, tomate, palta, chucrut y salsa americana.", imagen: "https://images.unsplash.com/photo-1619740455993-9e612b1af08a?w=600&auto=format&fit=crop&q=80" },
-            { id: 5, nombre: "Papas Fritas", categoria: "papas", precio: 3000, descripcion: "Papas fritas crujientes, ideales para acompañar tu pedido.", imagen: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=600&auto=format&fit=crop&q=80" },
+            { id: 5, nombre: "Papas Fritas", categoria: "papas", precio: 3000, descripcion: "Papas fritas crujientes, ideales para acompañar.", imagen: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=600&auto=format&fit=crop&q=80" },
             { id: 6, nombre: "Papas Cheddar", categoria: "papas", precio: 4500, descripcion: "Papas fritas con queso cheddar y tocino.", imagen: "https://images.unsplash.com/photo-1639024471283-03518883512d?w=600&auto=format&fit=crop&q=80" },
             { id: 7, nombre: "Bebida", categoria: "bebestibles", precio: 1500, descripcion: "Bebida en lata de 350 ml.", imagen: "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=600&auto=format&fit=crop&q=80" },
             { id: 8, nombre: "Jugo Natural", categoria: "bebestibles", precio: 2000, descripcion: "Jugo natural preparado al momento.", imagen: "https://images.unsplash.com/photo-1613478223719-2ab802602423?w=600&auto=format&fit=crop&q=80" }
@@ -144,18 +139,15 @@
 
             lista.forEach(producto => {
                 contenedor.innerHTML += `
-                    <div class="bg-slate-900/80 border border-slate-800 rounded-2xl overflow-hidden shadow-xl flex flex-col h-full hover:border-emerald-500/50 transition-all duration-300">
-                        <div class="h-48 overflow-hidden">
-                            <img src="${producto.imagen}" alt="${producto.nombre}" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-                        </div>
-                        <div class="p-5 flex flex-col flex-grow">
-                            <h3 class="text-lg font-bold text-white">${producto.nombre}</h3>
-                            <p class="text-slate-400 text-sm mt-2 leading-relaxed">${producto.descripcion}</p>
-                            <div class="mt-auto pt-6 flex justify-between items-center">
-                                <span class="text-xl font-extrabold text-emerald-400">$${producto.precio.toLocaleString("es-CL")}</span>
-                                <button onclick="agregarAlCarro(${producto.id})" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 px-4 py-2.5 rounded-xl text-sm font-bold shadow-lg transition-all active:scale-95 flex items-center gap-1.5">
-                                    <i class="fa-solid fa-plus text-xs"></i>
-                                    Pedir
+                    <div class="bg-slate-900/90 border border-slate-800/80 rounded-2xl overflow-hidden shadow-md flex gap-3 p-3 items-center">
+                        <img src="${producto.imagen}" alt="${producto.nombre}" class="w-24 h-24 object-cover rounded-xl flex-shrink-0">
+                        <div class="flex flex-col flex-grow min-w-0">
+                            <h3 class="text-sm font-bold text-white truncate">${producto.nombre}</h3>
+                            <p class="text-slate-400 text-xs mt-1 line-clamp-2 leading-relaxed">${producto.descripcion}</p>
+                            <div class="mt-2.5 flex justify-between items-center">
+                                <span class="text-sm font-extrabold text-emerald-400">$${producto.precio.toLocaleString("es-CL")}</span>
+                                <button onclick="agregarAlCarro(${producto.id})" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 px-3 py-1.5 rounded-lg text-xs font-bold transition-all active:scale-95 flex items-center gap-1">
+                                    <i class="fa-solid fa-plus text-[10px]"></i> Pedir
                                 </button>
                             </div>
                         </div>
@@ -187,7 +179,7 @@
             lista.innerHTML = "";
 
             if (carrito.length === 0) {
-                lista.innerHTML = `<p class="text-center text-slate-500 py-6">Tu carrito está vacío 🛒</p>`;
+                lista.innerHTML = `<p class="text-center text-slate-500 py-6 text-sm">Tu carrito está vacío 🛒</p>`;
                 document.getElementById("carrito-total").innerText = "$0";
             } else {
                 let total = 0;
@@ -197,15 +189,15 @@
                     total += subtotal;
 
                     lista.innerHTML += `
-                        <div class="flex justify-between items-center py-3 border-b border-slate-800/50">
-                            <div>
-                                <p class="font-bold text-sm">${producto.nombre}</p>
-                                <p class="text-sm text-slate-400">${producto.cantidad} x $${producto.precio.toLocaleString("es-CL")}</p>
+                        <div class="flex justify-between items-center py-2.5">
+                            <div class="min-w-0 pr-2">
+                                <p class="font-bold text-xs truncate">${producto.nombre}</p>
+                                <p class="text-xs text-slate-400">$${subtotal.toLocaleString("es-CL")}</p>
                             </div>
-                            <div class="flex items-center gap-2">
-                                <button onclick="cambiarCantidad(${producto.id}, -1)" class="bg-slate-800 hover:bg-slate-700 px-3 py-1 rounded-lg">-</button>
-                                <span class="text-sm">${producto.cantidad}</span>
-                                <button onclick="cambiarCantidad(${producto.id}, 1)" class="bg-slate-800 hover:bg-slate-700 px-3 py-1 rounded-lg">+</button>
+                            <div class="flex items-center gap-2 flex-shrink-0">
+                                <button onclick="cambiarCantidad(${producto.id}, -1)" class="bg-slate-800 text-white w-7 h-7 rounded-lg text-xs font-bold flex items-center justify-center">-</button>
+                                <span class="text-xs font-semibold w-4 text-center">${producto.cantidad}</span>
+                                <button onclick="cambiarCantidad(${producto.id}, 1)" class="bg-slate-800 text-white w-7 h-7 rounded-lg text-xs font-bold flex items-center justify-center">+</button>
                             </div>
                         </div>
                     `;
@@ -297,12 +289,12 @@
 
         function filtrarMenu(categoria, boton) {
             document.querySelectorAll(".categoria-btn").forEach(btn => {
-                btn.classList.remove("bg-emerald-500", "text-slate-950");
-                btn.classList.add("bg-transparent", "text-slate-300");
+                btn.classList.remove("bg-emerald-500", "text-slate-950", "font-bold");
+                btn.classList.add("bg-slate-800/80", "text-slate-300", "font-semibold");
             });
 
-            boton.classList.remove("bg-transparent", "text-slate-300");
-            boton.classList.add("bg-emerald-500", "text-slate-950");
+            boton.classList.remove("bg-slate-800/80", "text-slate-300", "font-semibold");
+            boton.classList.add("bg-emerald-500", "text-slate-950", "font-bold");
 
             if (categoria === "todos") {
                 mostrarProductos(productos);
