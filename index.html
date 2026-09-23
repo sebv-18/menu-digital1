@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Menú</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -13,6 +13,10 @@
     <style>
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
+            overscroll-behavior-y: none; /* Evita el rebote de la pantalla en móviles */
+        }
+        html {
+            overscroll-behavior-y: none;
         }
     </style>
 </head>
@@ -40,19 +44,19 @@
     <!-- CATEGORÍAS -->
     <!-- ============================= -->
     <nav class="sticky top-4 z-30 flex justify-center gap-2 md:gap-3 overflow-x-auto px-4 py-3 bg-slate-900/75 backdrop-blur-md max-w-3xl mx-auto rounded-full border border-slate-800 shadow-2xl mb-8">
-        <button onclick="filtrarMenu('todos', this)" class="categoria-btn bg-emerald-500 text-slate-950 px-5 py-2 rounded-full text-sm font-bold transition-all">
+        <button onclick="filtrarMenu('todos', this)" class="categoria-btn bg-emerald-500 text-slate-950 px-5 py-2 rounded-full text-sm font-bold transition-all whitespace-nowrap">
            Todo
        </button>
-        <button onclick="filtrarMenu('hamburguesas', this)" class="categoria-btn bg-transparent text-slate-300 px-5 py-2 rounded-full text-sm font-semibold hover:bg-slate-800 hover:text-white transition-all">
+        <button onclick="filtrarMenu('hamburguesas', this)" class="categoria-btn bg-transparent text-slate-300 px-5 py-2 rounded-full text-sm font-semibold hover:bg-slate-800 hover:text-white transition-all whitespace-nowrap">
            Hamburguesas
        </button>
-        <button onclick="filtrarMenu('completos', this)" class="categoria-btn bg-transparent text-slate-300 px-5 py-2 rounded-full text-sm font-semibold hover:bg-slate-800 hover:text-white transition-all">
+        <button onclick="filtrarMenu('completos', this)" class="categoria-btn bg-transparent text-slate-300 px-5 py-2 rounded-full text-sm font-semibold hover:bg-slate-800 hover:text-white transition-all whitespace-nowrap">
            Completos
        </button>
-        <button onclick="filtrarMenu('papas', this)" class="categoria-btn bg-transparent text-slate-300 px-5 py-2 rounded-full text-sm font-semibold hover:bg-slate-800 hover:text-white transition-all">
+        <button onclick="filtrarMenu('papas', this)" class="categoria-btn bg-transparent text-slate-300 px-5 py-2 rounded-full text-sm font-semibold hover:bg-slate-800 hover:text-white transition-all whitespace-nowrap">
            Papas
        </button>
-        <button onclick="filtrarMenu('bebestibles', this)" class="categoria-btn bg-transparent text-slate-300 px-5 py-2 rounded-full text-sm font-semibold hover:bg-slate-800 hover:text-white transition-all">
+        <button onclick="filtrarMenu('bebestibles', this)" class="categoria-btn bg-transparent text-slate-300 px-5 py-2 rounded-full text-sm font-semibold hover:bg-slate-800 hover:text-white transition-all whitespace-nowrap">
            Bebestibles
        </button>
     </nav>
@@ -90,10 +94,10 @@
                    <i class="fa-solid fa-bag-shopping text-emerald-400"></i>
                     Tu Pedido
                </h2>
-               <button onclick="cerrarModalCarrito()" class="text-slate-400 hover:text-white text-xl">
+               <button onclick="cerrarModalCarrito()" class="text-slate-400 hover:text-white text-xl p-2">
                    <i class="fa-solid fa-xmark"></i>
                </button>
-           </div>
+            </div>
 
             <!-- PRODUCTOS (Con scroll si es largo) -->
             <div id="lista-carrito-items" class="py-4 overflow-y-auto space-y-3 flex-grow">
@@ -150,9 +154,6 @@
     <!-- JAVASCRIPT -->
     <!-- ============================= -->
     <script>
-        /* =============================
-             PRODUCTOS
-        ============================= */
         const productos = [
             {
                 id: 1,
@@ -220,15 +221,9 @@
             }
         ];
 
-        /* =============================
-             CARRITO Y ESTADO
-        ============================= */
         let carrito = [];
-        let tipoEntrega = "retiro"; // 'retiro' o 'reparto'
+        let tipoEntrega = "retiro";
 
-        /* =============================
-             MOSTRAR PRODUCTOS
-        ============================= */
         function mostrarProductos(lista) {
             const contenedor = document.getElementById("contenedor-menu");
             contenedor.innerHTML = "";
@@ -236,23 +231,20 @@
             lista.forEach(producto => {
                 contenedor.innerHTML += `
                     <div class="bg-slate-900/80 border border-slate-800 rounded-2xl overflow-hidden shadow-xl flex flex-col h-full hover:border-emerald-500/50 transition-all duration-300">
-                        <!-- IMAGEN -->
                         <div class="h-48 overflow-hidden">
                             <img src="${producto.imagen}" alt="${producto.nombre}" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
                         </div>
-                        <!-- INFORMACIÓN -->
                         <div class="p-5 flex flex-col flex-grow">
                             <h3 class="text-lg font-bold text-white">${producto.nombre}</h3>
                             <p class="text-slate-400 text-sm mt-2 leading-relaxed">${producto.descripcion}</p>
-                            <!-- PRECIO Y BOTÓN -->
                             <div class="mt-auto pt-6 flex justify-between items-center">
-                                 <span class="text-xl font-extrabold text-emerald-400">
-                                     $${producto.precio.toLocaleString("es-CL")}
-                                 </span>
-                                 <button onclick="agregarAlCarro(${producto.id})" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 px-4 py-2.5 rounded-xl text-sm font-bold shadow-lg transition-all active:scale-95 flex items-center gap-1.5">
-                                     <i class="fa-solid fa-plus text-xs"></i>
-                                     Pedir
-                                 </button>
+                               <span class="text-xl font-extrabold text-emerald-400">
+                                   $${producto.precio.toLocaleString("es-CL")}
+                               </span>
+                               <button onclick="agregarAlCarro(${producto.id})" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 px-4 py-2.5 rounded-xl text-sm font-bold shadow-lg transition-all active:scale-95 flex items-center gap-1.5">
+                                   <i class="fa-solid fa-plus text-xs"></i>
+                                   Pedir
+                               </button>
                             </div>
                         </div>
                     </div>
@@ -260,9 +252,6 @@
             });
         }
 
-        /* =============================
-             AGREGAR AL CARRITO
-        ============================= */
         function agregarAlCarro(id) {
             const producto = productos.find(p => p.id === id);
             const existente = carrito.find(p => p.id === id);
@@ -275,17 +264,11 @@
             actualizarContador();
         }
 
-        /* =============================
-             CONTADOR
-        ============================= */
         function actualizarContador() {
             const cantidad = carrito.reduce((total, producto) => total + producto.cantidad, 0);
             document.getElementById("contador-carrito").innerText = cantidad;
         }
 
-        /* =============================
-             CAMBIAR TIPO DE ENTREGA
-        ============================= */
         function cambiarTipoEntrega(tipo) {
             tipoEntrega = tipo;
             const btnRetiro = document.getElementById("btn-retiro");
@@ -304,26 +287,21 @@
             actualizarTotalesModal();
         }
 
-        /* =============================
-             ABRIR CARRITO
-        ============================= */
         function abrirModalCarrito() {
             renderizarItemsCarrito();
             document.getElementById("modal-carrito").classList.remove("hidden");
             document.getElementById("modal-carrito").classList.add("flex");
+            // Bloquea el scroll del fondo cuando el carrito está abierto
+            document.body.style.overflow = 'hidden';
         }
 
-        /* =============================
-             CERRAR CARRITO
-        ============================= */
         function cerrarModalCarrito() {
             document.getElementById("modal-carrito").classList.add("hidden");
             document.getElementById("modal-carrito").classList.remove("flex");
+            // Restaura el scroll del fondo
+            document.body.style.overflow = 'auto';
         }
 
-        /* =============================
-             RENDERIZAR ITEMS Y TOTALES
-        ============================= */
         function renderizarItemsCarrito() {
             const lista = document.getElementById("lista-carrito-items");
             lista.innerHTML = "";
@@ -332,17 +310,16 @@
                 lista.innerHTML = `<p class="text-center text-slate-500 py-6">Tu carrito está vacío 🛒</p>`;
             } else {
                 carrito.forEach(producto => {
-                    const subtotal = producto.precio * producto.cantidad;
                     lista.innerHTML += `
                         <div class="flex justify-between items-center py-2 border-b border-slate-800/50">
                             <div>
-                                 <p class="font-bold text-sm">${producto.nombre}</p>
-                                 <p class="text-xs text-slate-400">${producto.cantidad} x $${producto.precio.toLocaleString("es-CL")}</p>
+                               <p class="font-bold text-sm">${producto.nombre}</p>
+                               <p class="text-xs text-slate-400">${producto.cantidad} x $${producto.precio.toLocaleString("es-CL")}</p>
                             </div>
                             <div class="flex items-center gap-2">
-                                 <button onclick="cambiarCantidad(${producto.id}, -1)" class="bg-slate-800 hover:bg-slate-700 px-2.5 py-1 rounded-lg text-xs">-</button>
-                                 <span class="text-sm font-semibold">${producto.cantidad}</span>
-                                 <button onclick="cambiarCantidad(${producto.id}, 1)" class="bg-slate-800 hover:bg-slate-700 px-2.5 py-1 rounded-lg text-xs">+</button>
+                               <button onclick="cambiarCantidad(${producto.id}, -1)" class="bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-lg text-xs">-</button>
+                               <span class="text-sm font-semibold">${producto.cantidad}</span>
+                               <button onclick="cambiarCantidad(${producto.id}, 1)" class="bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-lg text-xs">+</button>
                             </div>
                         </div>
                     `;
@@ -356,9 +333,6 @@
             document.getElementById("carrito-total").innerText = "$" + totalFinal.toLocaleString("es-CL");
         }
 
-        /* =============================
-             CAMBIAR CANTIDAD
-        ============================= */
         function cambiarCantidad(id, cambio) {
             const producto = carrito.find(p => p.id === id);
             if (producto) {
@@ -371,9 +345,6 @@
             renderizarItemsCarrito();
         }
 
-        /* =============================
-             WHATSAPP
-        ============================= */
         function enviarPedidoWhatsApp() {
             if (carrito.length === 0) {
                 alert("Agrega al menos un producto al carrito.");
@@ -397,7 +368,7 @@
 
             let mensaje = `Hola, soy *${nombre}* (%0A📦 *Tipo de entrega:* ${tipoEntrega === 'retiro' ? 'Retiro en Local' : 'Reparto a domicilio'}`;
             
-            if (tipoEntrega === 'reparto') {
+            if (tipoEntregs === 'reparto') {
                 mensaje += `%0A📍 *Dirección:* ${direccion}`;
             }
 
@@ -412,15 +383,12 @@
 
             mensaje += `%0A*Total a pagar: $${totalFinal.toLocaleString("es-CL")}*`;
 
-            const numeroWhatsApp = "56912345678"; // Reemplaza con tu número
+            const numeroWhatsApp = "56912345678";
             const url = `https://wa.me/${numeroWhatsApp}?text=${mensaje}`;
 
             window.open(url, "_blank");
         }
 
-        /* =============================
-             FILTRAR CATEGORÍAS
-        ============================= */
         function filtrarMenu(categoria, boton) {
             document.querySelectorAll(".categoria-btn").forEach(btn => {
                 btn.classList.remove("bg-emerald-500", "text-slate-950");
@@ -438,9 +406,6 @@
             }
         }
 
-        /* =============================
-             INICIAR PÁGINA
-        ============================= */
         mostrarProductos(productos);
     </script>
 </body>
