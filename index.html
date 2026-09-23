@@ -18,6 +18,14 @@
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
         }
+        /* Ocultar barra de desplazamiento manteniendo la funcionalidad táctil */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
     </style>
 </head>
 
@@ -29,7 +37,7 @@
     <!-- ============================= -->
     <!-- ENCABEZADO -->
     <!-- ============================= -->
-    <header class="text-center py-12 px-4 relative z-10">
+    <header class="text-center py-10 px-4 relative z-10">
         <p class="text-emerald-400 font-semibold tracking-widest text-sm mb-3">
             MENÚ
         </p>
@@ -44,28 +52,30 @@
     <!-- ============================= -->
     <!-- CATEGORÍAS -->
     <!-- ============================= -->
-    <nav class="sticky top-4 z-35 flex justify-start md:justify-center gap-2 md:gap-3 overflow-x-auto px-4 py-3 bg-slate-900/70 backdrop-blur-md max-w-3xl mx-auto rounded-full border border-slate-800 shadow-2xl mb-8 no-scrollbar">
-        <button onclick="filtrarMenu('todos', this)" class="categoria-btn bg-emerald-500 text-slate-950 px-5 py-2 rounded-full text-sm font-bold transition-all whitespace-nowrap">
-            Todo
-        </button>
-        <button onclick="filtrarMenu('hamburguesas', this)" class="categoria-btn bg-transparent text-slate-300 px-5 py-2 rounded-full text-sm font-semibold hover:bg-slate-800 hover:text-white transition-all whitespace-nowrap">
-            Hamburguesas
-        </button>
-        <button onclick="filtrarMenu('completos', this)" class="categoria-btn bg-transparent text-slate-300 px-5 py-2 rounded-full text-sm font-semibold hover:bg-slate-800 hover:text-white transition-all whitespace-nowrap">
-            Completos
-        </button>
-        <button onclick="filtrarMenu('papas', this)" class="categoria-btn bg-transparent text-slate-300 px-5 py-2 rounded-full text-sm font-semibold hover:bg-slate-800 hover:text-white transition-all whitespace-nowrap">
-            Papas
-        </button>
-        <button onclick="filtrarMenu('bebestibles', this)" class="categoria-btn bg-transparent text-slate-300 px-5 py-2 rounded-full text-sm font-semibold hover:bg-slate-800 hover:text-white transition-all whitespace-nowrap">
-            Bebestibles
-        </button>
-    </nav>
+    <div class="sticky top-3 z-40 px-4 w-full">
+        <nav class="flex justify-start md:justify-center gap-2 overflow-x-auto px-4 py-3 bg-slate-900/90 backdrop-blur-md max-w-3xl mx-auto rounded-full border border-slate-800 shadow-2xl no-scrollbar">
+            <button onclick="filtrarMenu('todos', this)" class="categoria-btn bg-emerald-500 text-slate-950 px-5 py-2 rounded-full text-sm font-bold transition-all whitespace-nowrap shadow-md">
+                Todo
+            </button>
+            <button onclick="filtrarMenu('hamburguesas', this)" class="categoria-btn bg-transparent text-slate-300 px-5 py-2 rounded-full text-sm font-semibold hover:bg-slate-800 hover:text-white transition-all whitespace-nowrap">
+                Hamburguesas
+            </button>
+            <button onclick="filtrarMenu('completos', this)" class="categoria-btn bg-transparent text-slate-300 px-5 py-2 rounded-full text-sm font-semibold hover:bg-slate-800 hover:text-white transition-all whitespace-nowrap">
+                Completos
+            </button>
+            <button onclick="filtrarMenu('papas', this)" class="categoria-btn bg-transparent text-slate-300 px-5 py-2 rounded-full text-sm font-semibold hover:bg-slate-800 hover:text-white transition-all whitespace-nowrap">
+                Papas
+            </button>
+            <button onclick="filtrarMenu('bebestibles', this)" class="categoria-btn bg-transparent text-slate-300 px-5 py-2 rounded-full text-sm font-semibold hover:bg-slate-800 hover:text-white transition-all whitespace-nowrap">
+                Bebestibles
+            </button>
+        </nav>
+    </div>
 
     <!-- ============================= -->
     <!-- PRODUCTOS -->
     <!-- ============================= -->
-    <main class="max-w-6xl mx-auto px-4 py-4 flex-grow w-full relative z-10">
+    <main class="max-w-6xl mx-auto px-4 py-6 flex-grow w-full relative z-10">
         <div id="contenedor-menu" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         </div>
     </main>
@@ -92,7 +102,7 @@
                 <h2 class="text-xl font-bold flex items-center gap-2">
                     <i class="fa-solid fa-bag-shopping text-emerald-400"></i> Tu Pedido
                 </h2>
-                <button onclick="cerrarModalCarrito()" class="text-slate-400 hover:text-white text-xl">
+                <button onclick="cerrarModalCarrito()" class="text-slate-400 hover:text-white text-xl p-2">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
@@ -124,13 +134,13 @@
                     </div>
                 </div>
 
-                <!-- DIRECCIÓN (Oculta por defecto si es retiro) -->
+                <!-- DIRECCIÓN -->
                 <div id="contenedor-direccion" class="hidden">
                     <input type="text" id="cliente-direccion" placeholder="Dirección de entrega (Calle, depto, número)" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-emerald-500">
                 </div>
 
                 <!-- WHATSAPP -->
-                <button onclick="enviarPedidoWhatsApp()" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-3.5 rounded-xl flex justify-center items-center gap-2 transition-all mt-2">
+                <button onclick="enviarPedidoWhatsApp()" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-3.5 rounded-xl flex justify-center items-center gap-2 transition-all mt-2 shadow-lg">
                     <i class="fa-brands fa-whatsapp text-lg"></i> Enviar pedido por WhatsApp
                 </button>
             </div>
@@ -148,9 +158,6 @@
     <!-- JAVASCRIPT -->
     <!-- ============================= -->
     <script>
-        /* =============================
-             PRODUCTOS
-        ============================= */
         const productos = [
             {
                 id: 1,
@@ -218,11 +225,8 @@
             }
         ];
 
-        /* =============================
-             CARRITO Y ESTADO
-        ============================= */
         let carrito = [];
-        let tipoEntrega = "retiro"; // Por defecto retiro
+        let tipoEntrega = "retiro";
 
         function seleccionarEntrega(tipo) {
             tipoEntrega = tipo;
@@ -241,9 +245,6 @@
             }
         }
 
-        /* =============================
-             MOSTRAR PRODUCTOS
-        ============================= */
         function mostrarProductos(lista) {
             const contenedor = document.getElementById("contenedor-menu");
             contenedor.innerHTML = "";
@@ -251,17 +252,12 @@
             lista.forEach(producto => {
                 contenedor.innerHTML += `
                     <div class="bg-slate-900/80 border border-slate-800 rounded-2xl overflow-hidden shadow-xl flex flex-col h-full hover:border-emerald-500/50 transition-all duration-300">
-                        <!-- IMAGEN -->
                         <div class="h-48 overflow-hidden">
                             <img src="${producto.imagen}" alt="${producto.nombre}" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
                         </div>
-
-                        <!-- INFORMACIÓN -->
                         <div class="p-5 flex flex-col flex-grow">
                             <h3 class="text-lg font-bold text-white">${producto.nombre}</h3>
                             <p class="text-slate-400 text-sm mt-2 leading-relaxed">${producto.descripcion}</p>
-
-                            <!-- ESTA PARTE QUEDA SIEMPRE ABAJO -->
                             <div class="mt-auto pt-6 flex justify-between items-center">
                                 <span class="text-xl font-extrabold text-emerald-400">
                                     $${producto.precio.toLocaleString("es-CL")}
@@ -276,9 +272,6 @@
             });
         }
 
-        /* =============================
-             AGREGAR AL CARRITO
-        ============================= */
         function agregarAlCarro(id) {
             const producto = productos.find(p => p.id === id);
             const existente = carrito.find(p => p.id === id);
@@ -292,17 +285,11 @@
             actualizarContador();
         }
 
-        /* =============================
-             CONTADOR
-        ============================= */
         function actualizarContador() {
             const cantidad = carrito.reduce((total, producto) => total + producto.cantidad, 0);
             document.getElementById("contador-carrito").innerText = cantidad;
         }
 
-        /* =============================
-             ABRIR CARRITO
-        ============================= */
         function abrirModalCarrito() {
             const lista = document.getElementById("lista-carrito-items");
             lista.innerHTML = "";
@@ -343,17 +330,11 @@
             document.getElementById("modal-carrito").classList.add("flex");
         }
 
-        /* =============================
-             CERRAR CARRITO
-        ============================= */
         function cerrarModalCarrito() {
             document.getElementById("modal-carrito").classList.add("hidden");
             document.getElementById("modal-carrito").classList.remove("flex");
         }
 
-        /* =============================
-             CAMBIAR CANTIDAD
-        ============================= */
         function cambiarCantidad(id, cambio) {
             const producto = carrito.find(p => p.id === id);
 
@@ -368,9 +349,6 @@
             abrirModalCarrito();
         }
 
-        /* =============================
-             WHATSAPP
-        ============================= */
         function enviarPedidoWhatsApp() {
             if (carrito.length === 0) {
                 alert("Agrega al menos un producto al carrito.");
@@ -409,23 +387,20 @@
 
             mensaje += `%0A*Total: $${total.toLocaleString("es-CL")}*`;
 
-            const numeroWhatsApp = "56912345678"; // Cambia este número por el WhatsApp del local
+            const numeroWhatsApp = "56912345678";
             const url = `https://wa.me/${numeroWhatsApp}?text=${mensaje}`;
 
             window.open(url, "_blank");
         }
 
-        /* =============================
-             FILTRAR CATEGORÍAS
-        ============================= */
         function filtrarMenu(categoria, boton) {
             document.querySelectorAll(".categoria-btn").forEach(btn => {
-                btn.classList.remove("bg-emerald-500", "text-slate-950");
+                btn.classList.remove("bg-emerald-500", "text-slate-950", "shadow-md");
                 btn.classList.add("bg-transparent", "text-slate-300");
             });
 
             boton.classList.remove("bg-transparent", "text-slate-300");
-            boton.classList.add("bg-emerald-500", "text-slate-950");
+            boton.classList.add("bg-emerald-500", "text-slate-950", "shadow-md");
 
             if (categoria === "todos") {
                 mostrarProductos(productos);
@@ -435,9 +410,6 @@
             }
         }
 
-        /* =============================
-             INICIAR PÁGINA
-        ============================= */
         mostrarProductos(productos);
     </script>
 </body>
